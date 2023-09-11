@@ -10,8 +10,5 @@
     <Folder Include="Models\" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\DiscoverySection\DiscoverySection.csproj" />
-  </ItemGroup>
 
 </Project>

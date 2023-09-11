@@ -7,7 +7,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Data\Storage\" />
       <Folder Include="Models\Entities\" />
       <Folder Include="Models\Entities\" />
     </ItemGroup>
@@ -18,8 +17,5 @@
     </ItemGroup>
 
 
-    <ItemGroup>
-      <ProjectReference Include="..\DiscoverySection\DiscoverySection.csproj" />
-    </ItemGroup>
 
 </Project>

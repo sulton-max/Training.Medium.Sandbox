@@ -1,3 +1,5 @@
-﻿// See https://aka.ms/new-console-template for more information
+﻿using Sandbox.Data.Context;
+using Sandbox.Data.SeedData;
 
-Console.WriteLine("Hello, World!");
+var context = TestingContext.Instance;
+await context.InitializeAsync();
