@@ -17,12 +17,12 @@ namespace EntitiesSection.Services.Interfaces
 
         ValueTask<User> GetById(Guid id);
 
-        ValueTask<User> CreateAsync(User user);
+        ValueTask<User> CreateAsync(User user, bool saveChanges = true);
 
-        ValueTask<User> UpdateAsync(User user);
+        ValueTask<User> UpdateAsync(User user, bool saveChanges = true);
 
-        ValueTask<User> DeleteAsync(Guid id);
+        ValueTask<User> DeleteAsync(Guid id, bool saveChanges = true);
 
-        ValueTask<User> DeleteAsync(User user);
+        ValueTask<User> DeleteAsync(User user, bool saveChanges = true);
     }
 }
