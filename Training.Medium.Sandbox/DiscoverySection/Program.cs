@@ -9,7 +9,7 @@ await dataContext.InitializeAsync();
 Console.WriteLine(JsonSerializer.Serialize(dataContext.Posts));
 var test = null as IPostStatisticsService;
 
-test.GetViralPosts()
+test.GetViralPosts();
 // popularity measurements
 
 // trending - the most viewed category
