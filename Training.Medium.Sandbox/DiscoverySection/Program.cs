@@ -1,6 +1,7 @@
 using System.Text.Json;
 using DiscoverySection.Data;
 using DiscoverySection.DataAccess;
+using DiscoverySection.Services;
 
 var dataContext = new AppDataContext();
 await dataContext.InitializeAsync();
@@ -15,4 +16,5 @@ test.GetViralPosts();
 // viral - the most liked/disliked category
 // popular - the most posted category
 
+// for push testing
 
