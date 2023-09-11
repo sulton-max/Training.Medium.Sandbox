@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using DiscoverySection.Data;
 using DiscoverySection.DataAccess;
 using DiscoverySection.Services;
@@ -16,4 +16,37 @@ test.GetViralPosts();
 // viral - the most liked/disliked category
 // popular - the most posted category
 
-//Bismillah
+// for push testing
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//Go bolla
