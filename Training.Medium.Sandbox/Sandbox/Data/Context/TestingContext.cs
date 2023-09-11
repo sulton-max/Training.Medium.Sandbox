@@ -11,7 +11,7 @@ public class TestingContext : AppFileContext
         var test = Assembly.GetAssembly(typeof(TestingContext))?.Location!;
     }
 
-    private static Lazy<TestingContext> _instance = new(() => new TestingContext(Directory.GetCurrentDirectory()));
+    private static readonly Lazy<TestingContext> CurrentInstance = new(() => new TestingContext(Directory.GetCurrentDirectory()));
 
-    public static TestingContext Instance => _instance.Value;
+    public static TestingContext Instance => CurrentInstance.Value;
 }
