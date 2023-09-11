@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using
@@ -10,9 +11,18 @@ namespace EntitiesSection.Services.Interfaces
 {
     public interface IUserService
     {
-        ValueTask<User> GetById(Guid Id)
-        {
+        IQueryable<User> Get(Expression<Func<User, bool>> predicate);
 
-        }
+        ValueTask<ICollection<User>> Get(IEnumerable<Guid> id);
+
+        ValueTask<User> GetById(Guid id);
+
+        ValueTask<User> CreateAsync(User user);
+
+        ValueTask<User> UpdateAsync(User user);
+
+        ValueTask<User> DeleteAsync(Guid id);
+
+        ValueTask<User> DeleteAsync(User user);
     }
 }
