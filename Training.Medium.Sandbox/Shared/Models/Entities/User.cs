@@ -9,13 +9,13 @@ public class User : SoftDeletedEntity
     public string LastName { get; set; }
     public string EmailAddress { get; set; }
 
-    public User(string FirstName, string LastName, string EmailAddress)
+    public User(string firstName, string lastName, string emailAddress)
     {
         Id = Guid.NewGuid();
-        base.IsDeleted = false;
-        this.FirstName = FirstName;
-        this.LastName = LastName;
-        this.EmailAddress = EmailAddress;
+        FirstName = firstName;
+        LastName = lastName;
+        EmailAddress = emailAddress;
+        IsDeleted = false;
     }
 
 
