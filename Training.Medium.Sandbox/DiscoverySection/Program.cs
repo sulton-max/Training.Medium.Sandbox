@@ -1,7 +1,6 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using DiscoverySection.Data;
 using DiscoverySection.DataAccess;
-using DiscoverySection.Services;
 
 var dataContext = new AppDataContext();
 await dataContext.InitializeAsync();
