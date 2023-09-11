@@ -11,4 +11,9 @@
       <Folder Include="Models\Entities\" />
     </ItemGroup>
 
+
+    <ItemGroup>
+      <PackageReference Include="Max.FileContext.Core" Version="0.0.1" />
+    </ItemGroup>
+
 </Project>

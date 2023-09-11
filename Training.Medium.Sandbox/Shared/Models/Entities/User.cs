@@ -1,10 +1,9 @@
-﻿using Shared.Models.Common;
+using Shared.Models.Common;
 
 namespace Shared.Models.Entities;
 
 public class User : SoftDeletedEntity
 {
-    public Guid Id { get; set; }
     public string FirstName { get; set; }
     public string LastName { get; set; }
     public string EmailAddress { get; set; }
@@ -17,7 +16,4 @@ public class User : SoftDeletedEntity
         EmailAddress = emailAddress;
         IsDeleted = false;
     }
-
-
-
 }

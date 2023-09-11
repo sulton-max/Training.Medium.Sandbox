@@ -1,6 +1,7 @@
-﻿namespace Shared.Models.Common;
+﻿using FileContext.Abstractions.Models.Entity;
 
-public interface IEntity
+namespace Shared.Models.Common;
+
+public interface IEntity : IFileSetEntity<Guid>
 {
-    Guid Id { get; set; }
 }
