@@ -9,11 +9,11 @@ await dataContext.InitializeAsync();
 Console.WriteLine(JsonSerializer.Serialize(dataContext.Posts));
 var test = null as IPostStatisticsService;
 
-test.GetViralPosts()
+test.GetViralPosts();
 // popularity measurements
 
 // trending - the most viewed category
 // viral - the most liked/disliked category
 // popular - the most posted category
 
-
+//Bismillah
