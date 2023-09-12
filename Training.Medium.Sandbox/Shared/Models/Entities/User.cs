@@ -11,6 +11,11 @@ public class User : SoftDeletedEntity
     public string EmailAddress { get; set; }
     public string PhoneNumber { get; set; }
 
+    public User()
+    {
+        
+    }
+
     public User(Guid id, string firstName, string lastName, string emailAddress, string phoneNumber)
     {
         Id = id;
