@@ -17,9 +17,4 @@
       <PackageReference Include="Max.FileContext.Core" Version="0.0.1" />
     </ItemGroup>
 
-
-    <ItemGroup>
-      <ProjectReference Include="..\DiscoverySection\DiscoverySection.csproj" />
-    </ItemGroup>
-
 </Project>

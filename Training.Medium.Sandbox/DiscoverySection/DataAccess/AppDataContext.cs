@@ -1,5 +1,4 @@
-﻿using DiscoverySection.Models;
-using FileContext.Abstractions.Models.FileSet;
+﻿using FileContext.Abstractions.Models.FileSet;
 using FileContext.Core.Models.FileSet;
 
 namespace DiscoverySection.DataAccess;
