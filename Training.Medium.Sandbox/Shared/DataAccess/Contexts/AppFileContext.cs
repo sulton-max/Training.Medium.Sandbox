@@ -1,11 +1,10 @@
-﻿using FileContext.Abstractions.Models.Entity;
-using FileContext.Abstractions.Models.FileSet;
+﻿using FileContext.Abstractions.Models.FileSet;
 using FileContext.Core.Models.FileSet;
 using FileContext.Core.Services;
 using Newtonsoft.Json;
 using Shared.Models.Entities;
 
-namespace Shared.DataAccess;
+namespace Shared.DataAccess.Contexts;
 
 public abstract class AppFileContext
 {

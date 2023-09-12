@@ -10,6 +10,10 @@ public class User : SoftDeletedEntity, IFileSetEntity<Guid>
     public string EmailAddress { get; set; }
     
 
+    public User()
+    {
+    }
+
     public User(string firstName, string lastName, string emailAddress)
     {
         Id = Guid.NewGuid();

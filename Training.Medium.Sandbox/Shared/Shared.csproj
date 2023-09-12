@@ -7,7 +7,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Data\Storage\" />
       <Folder Include="Models\Entities\" />
       <Folder Include="Models\Entities\" />
     </ItemGroup>
@@ -17,4 +16,9 @@
       <PackageReference Include="Max.FileContext.Core" Version="0.0.1" />
     </ItemGroup>
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> main
 </Project>

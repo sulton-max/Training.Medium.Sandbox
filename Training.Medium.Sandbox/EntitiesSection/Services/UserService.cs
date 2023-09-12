@@ -1,13 +1,19 @@
+<<<<<<< HEAD
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Linq.Expressions;
 using DiscoverySection.DataAccess;
 using DiscoverySection.Models;
 using EntitiesSection.Services.Interfaces;
+=======
+﻿using EntitiesSection.Services.Interfaces;
+using Shared.DataAccess.Contexts;
+>>>>>>> main
 
 namespace EntitiesSection.Services
 {
     public class UserService : IUserService
     {
+<<<<<<< HEAD
         private readonly AppDataContext _appDataContext;
         private readonly ValidationService _validationService;
         private List<Exception> exceptions;
@@ -98,6 +104,15 @@ namespace EntitiesSection.Services
             result.PhoneNumber = user.PhoneNumber;
             _appDataContext.SaveChangesAsync();
             return result;
+=======
+        private readonly AppFileContext _appDataContext;
+        private readonly IValidationService _validationService;
+
+        public UserService(AppFileContext appDataContext, IValidationService validationService)
+        {
+            _appDataContext = appDataContext;
+            _validationService = validationService;
+>>>>>>> main
         }
     }
 }
