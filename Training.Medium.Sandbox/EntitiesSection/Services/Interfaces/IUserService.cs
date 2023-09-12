@@ -11,7 +11,7 @@ namespace EntitiesSection.Services.Interfaces
 
         ValueTask<User> GetById(Guid id);
 
-        ValueTask<User> CreateAsync(User user, bool saveChanges = true);
+        public ValueTask<User> CreateAsync(User user, bool saveChanges = true);
 
         ValueTask<User> UpdateAsync(User user, bool saveChanges = true);
 
