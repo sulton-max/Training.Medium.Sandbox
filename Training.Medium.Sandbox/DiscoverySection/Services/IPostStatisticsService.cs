@@ -5,6 +5,7 @@ namespace DiscoverySection.Services;
 public interface IPostStatisticsService
 {
     /// <summary>
+    /// 
     /// Returns query of trending posts
     /// </summary>
     /// <returns>Queryable source of posts</returns>
