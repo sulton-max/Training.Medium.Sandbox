@@ -7,6 +7,9 @@ export default {
         extend: {
             colors: {
                 "guest-view-primary": '#ffc017'
+            },
+            fontFamily: {
+                'times': ['Times New Roman', 'serif'],
             }
         },
     },
