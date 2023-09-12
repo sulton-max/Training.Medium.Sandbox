@@ -14,6 +14,10 @@ public class User : SoftDeletedEntity, IFileSetEntity<Guid>
     {
     }
 
+    public User()
+    {
+    }
+
     public User(string firstName, string lastName, string emailAddress)
     {
         Id = Guid.NewGuid();
