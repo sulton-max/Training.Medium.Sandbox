@@ -1,24 +1,18 @@
-<<<<<<< HEAD
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 using System.Linq.Expressions;
-using DiscoverySection.DataAccess;
-using DiscoverySection.Models;
 using EntitiesSection.Services.Interfaces;
-=======
-﻿using EntitiesSection.Services.Interfaces;
 using Shared.DataAccess.Contexts;
->>>>>>> main
+using Shared.Models.Entities;
 
 namespace EntitiesSection.Services
 {
     public class UserService : IUserService
     {
-<<<<<<< HEAD
-        private readonly AppDataContext _appDataContext;
+        private readonly AppFileContext _appDataContext;
         private readonly ValidationService _validationService;
         private List<Exception> exceptions;
 
-        public UserService(AppDataContext appDataContext, ValidationService validationService)
+        public UserService(AppFileContext appDataContext, ValidationService validationService)
         {
             _appDataContext = appDataContext;
             _validationService = validationService;

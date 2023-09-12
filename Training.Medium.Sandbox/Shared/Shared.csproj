@@ -15,9 +15,4 @@
       <PackageReference Include="Max.FileContext.Core" Version="0.0.1" />
     </ItemGroup>
 
-<<<<<<< HEAD
-=======
-
-
->>>>>>> main
 </Project>
