@@ -5,4 +5,7 @@ var context = TestingContext.Instance;
 await context.InitializeAsync();
 
 var users = await context.Users.ToListAsync();
-Console.WriteLine(users.Count);
+foreach (var user in users)
+{
+    Console.WriteLine(user);
+}

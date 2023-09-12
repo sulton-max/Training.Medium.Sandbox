@@ -1,5 +1,4 @@
 ﻿using System.Linq.Expressions;
-using
 using Shared.Models.Entities;
 
 namespace EntitiesSection.Services.Interfaces
