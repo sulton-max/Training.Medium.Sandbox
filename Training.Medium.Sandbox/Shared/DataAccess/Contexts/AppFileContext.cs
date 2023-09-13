@@ -9,7 +9,7 @@ namespace Shared.DataAccess.Contexts;
 public abstract class AppFileContext
 {
     public readonly IFileSet<User, Guid> Users;
-    public readonly IFileSet<Post, Guid> Posts;
+    public readonly IFileSet<BlogPost, Guid> Posts;
 
     public AppFileContext(string folderPath)
     {
@@ -17,7 +17,7 @@ public abstract class AppFileContext
         var provider = new HumanizerPluralizationProvider();
 
         Users = new FileSet<User, Guid>(folderPath, serializer, provider);
-        Posts = new FileSet<Post, Guid>(folderPath, serializer, provider);
+        Posts = new FileSet<BlogPost, Guid>(folderPath, serializer, provider);
     }
 
     public async ValueTask FetchAsync()
