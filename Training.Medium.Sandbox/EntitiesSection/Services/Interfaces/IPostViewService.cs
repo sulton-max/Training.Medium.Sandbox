@@ -5,7 +5,7 @@ namespace EntitiesSection.Services.Interfaces;
 
 public interface IPostViewService
 {
-    IQueryable<PostView> Get(Expression<Func<User, bool>> predicate);
+    IQueryable<PostView> Get(Expression<Func<PostView, bool>> predicate);
 
     ValueTask<ICollection<PostView>> GetAsync(IEnumerable<Guid> ids);
 
