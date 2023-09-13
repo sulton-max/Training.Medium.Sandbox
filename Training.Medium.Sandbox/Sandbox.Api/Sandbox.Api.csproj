@@ -6,4 +6,19 @@
         <ImplicitUsings>enable</ImplicitUsings>
     </PropertyGroup>
 
+    <ItemGroup>
+      <Folder Include="Controllers\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\ContentQualitySection\ContentQualitySection.csproj" />
+      <ProjectReference Include="..\DiscoverySection\DiscoverySection.csproj" />
+      <ProjectReference Include="..\EntitiesSection\EntitiesSection.csproj" />
+      <ProjectReference Include="..\FeedSection\FeedSection.csproj" />
+      <ProjectReference Include="..\MembershipSection\MembershipSection.csproj" />
+      <ProjectReference Include="..\NotificationsSection\NotificationsSection.csproj" />
+      <ProjectReference Include="..\PostFeedbackSection\PostFeedbackSection.csproj" />
+      <ProjectReference Include="..\Shared\Shared.csproj" />
+    </ItemGroup>
+
 </Project>

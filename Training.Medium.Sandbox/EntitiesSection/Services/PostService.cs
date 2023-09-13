@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 
 namespace EntitiesSection.Services
 {
-    internal class PostService : IPostService
+    public class PostService : IPostService
     {
         private readonly AppFileContext _appDataContext;
         //private readonly IValidationService _validationService;
