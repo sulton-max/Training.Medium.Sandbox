@@ -82,37 +82,37 @@ public class PostsController : ControllerBase
 
     #region Post feedback
 
-    [HttpGet("feedback")]
+    [HttpGet("feedbacks")]
     public IActionResult GetFeedbacks()
     {
         throw new NotImplementedException();
     }
 
-    [HttpGet("{postId:guid}/feedback")]
+    [HttpGet("{postId:guid}/feedbacks")]
     public IActionResult GetFeedbacksByPostId()
     {
         throw new NotImplementedException();
     }
 
-    [HttpGet("{postId:guid}/feedback/{feedbackId:guid}")]
+    [HttpGet("{postId:guid}/feedbacks/{feedbackId:guid}")]
     public IActionResult GetFeedbackById()
     {
         throw new NotImplementedException();
     }
 
-    [HttpPost("{postId:guid}/feedback")]
+    [HttpPost("{postId:guid}/feedbacks")]
     public IActionResult CreateFeedback()
     {
         throw new NotImplementedException();
     }
 
-    [HttpPut("{postId:guid}/feedback/{feedbackId:guid}")]
+    [HttpPut("{postId:guid}/feedbacks/{feedbackId:guid}")]
     public IActionResult UpdateFeedback()
     {
         throw new NotImplementedException();
     }
 
-    [HttpDelete("{postId:guid}/feedback/{feedbackId:guid}")]
+    [HttpDelete("{postId:guid}/feedbacks/{feedbackId:guid}")]
     public IActionResult DeleteFeedback()
     {
         throw new NotImplementedException();

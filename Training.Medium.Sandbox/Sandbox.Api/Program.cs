@@ -35,6 +35,16 @@ builder.Services.Configure<EmailServerSettings>(builder.Configuration.GetSection
 
 builder.Services.AddSingleton<IEmailSenderService, EmailSenderService>().AddScoped<IEmailManagementService, EmailManagementService>();
 
+// dev tools
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+builder.Services.AddControllers();
+builder.Services.AddRouting(options => options.LowercaseUrls = true);
+
 var app = builder.Build();
+
+app.UseSwagger();
+app.UseSwaggerUI();
 
 await app.RunAsync();
