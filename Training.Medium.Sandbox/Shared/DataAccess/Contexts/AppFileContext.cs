@@ -7,11 +7,11 @@ using Shared.Models.Entities;
 
 namespace Shared.DataAccess.Contexts;
 
-public abstract class AppFileContext
+public class AppFileContext : IDataContext
 {
-    public readonly IFileSet<User, Guid> Users;
-    public readonly IFileSet<BlogPost, Guid> Posts;
-    public readonly IFileSet<PostView, Guid> PostViews;
+    public IFileSet<User, Guid> Users { get; }
+    public IFileSet<BlogPost, Guid> Posts { get; }
+    public IFileSet<PostView, Guid> PostViews { get; }
 
     public AppFileContext(string folderPath)
     {

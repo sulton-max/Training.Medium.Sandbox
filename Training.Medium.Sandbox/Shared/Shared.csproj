@@ -6,9 +6,16 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
-
     <ItemGroup>
       <PackageReference Include="Max.FileContext.Core" Version="0.0.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Data\" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Bogus" Version="34.0.2" />
     </ItemGroup>
 
 </Project>

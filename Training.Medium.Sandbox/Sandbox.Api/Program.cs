@@ -5,8 +5,18 @@ using MembershipSection.Services.Interfaces;
 using NotificationsSection.Services;
 using NotificationsSection.Services.Interfaces;
 using Sandbox.Api.Settings;
+using Shared.DataAccess.Contexts;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// validations
+builder.Services.AddSingleton<IValidationService, ValidationService>();
+
+// data access
+// builder.Services.AddScoped<IDataContext, AppFileContext>(_ => new AppFileContext(builder.Environment.ContentRootPath));
+
+// TODO : remove this
+builder.Services.AddScoped<AppFileContext>(_ => new AppFileContext(builder.Environment.ContentRootPath));
 
 // account
 builder.Services.AddScoped<IUserService, UserService>();
@@ -26,8 +36,5 @@ builder.Services.Configure<EmailServerSettings>(builder.Configuration.GetSection
 builder.Services.AddSingleton<IEmailSenderService, EmailSenderService>().AddScoped<IEmailManagementService, EmailManagementService>();
 
 var app = builder.Build();
-
-
-app.MapGet("/", () => "Hello World!");
 
 await app.RunAsync();

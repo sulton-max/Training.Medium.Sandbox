@@ -7,10 +7,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Controllers\" />
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\ContentQualitySection\ContentQualitySection.csproj" />
       <ProjectReference Include="..\DiscoverySection\DiscoverySection.csproj" />
       <ProjectReference Include="..\EntitiesSection\EntitiesSection.csproj" />

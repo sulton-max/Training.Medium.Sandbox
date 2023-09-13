@@ -1,9 +1,8 @@
 ﻿using Bogus;
-using Sandbox.Data.Context;
 using Shared.DataAccess.Contexts;
 using Shared.Models.Entities;
 
-namespace Sandbox.Data.SeedData;
+namespace Shared.Data.SeedData;
 
 public static class SeedData
 {
