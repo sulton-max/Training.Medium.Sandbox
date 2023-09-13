@@ -1,12 +1,7 @@
 ﻿using EntitiesSection.Services.Interfaces;
 using Shared.DataAccess.Contexts;
 using Shared.Models.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EntitiesSection.Services
 {
@@ -81,6 +76,21 @@ namespace EntitiesSection.Services
 
             await _appDataContext.SaveChangesAsync();
             return foundPost;
+        }
+
+        private bool ValidateOnCreate()
+        {
+            return true;
+        }
+
+        public bool ValidateOnUpdate()
+        {
+            return true;
+        }
+
+        public bool ValidatePost()
+        {
+            return true;
         }
     }
 }
