@@ -1,4 +1,4 @@
-﻿using DiscoverySection.Models;
+﻿using Shared.Models.Entities;
 
 namespace DiscoverySection.Services;
 
