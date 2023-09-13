@@ -7,11 +7,11 @@ namespace EntitiesSection.Services.Interfaces
     {
         IQueryable<User> Get(Expression<Func<User, bool>> predicate);
 
-        ValueTask<ICollection<User>> Get(IEnumerable<Guid> id);
+        ValueTask<ICollection<User>> GetAsync(IEnumerable<Guid> ids);
 
-        ValueTask<User> GetById(Guid id);
+        ValueTask<User?> GetByIdAsync(Guid id);
 
-        public ValueTask<User> CreateAsync(User user, bool saveChanges = true);
+        ValueTask<User> CreateAsync(User user, bool saveChanges = true);
 
         ValueTask<User> UpdateAsync(User user, bool saveChanges = true);
 

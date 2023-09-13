@@ -8,6 +8,10 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\DiscoverySection\DiscoverySection.csproj" />
+      <ProjectReference Include="..\EntitiesSection\EntitiesSection.csproj" />
+      <ProjectReference Include="..\FeedSection\FeedSection.csproj" />
+      <ProjectReference Include="..\PostFeedbackSection\PostFeedbackSection.csproj" />
       <ProjectReference Include="..\Shared\Shared.csproj" />
     </ItemGroup>
 
