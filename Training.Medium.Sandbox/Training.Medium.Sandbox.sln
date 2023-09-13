@@ -1,16 +1,21 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csproj", "{B305DD66-1226-46A4-B92F-B50BB13A5B31}"
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34024.191
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared", "Shared\Shared.csproj", "{B305DD66-1226-46A4-B92F-B50BB13A5B31}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostFeedbackSection", "PostFeedbackSection\PostFeedbackSection.csproj", "{DFC1D2A3-4F3A-4D7D-AD8A-D669378652C8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PostFeedbackSection", "PostFeedbackSection\PostFeedbackSection.csproj", "{DFC1D2A3-4F3A-4D7D-AD8A-D669378652C8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sandbox", "Sandbox\Sandbox.csproj", "{D9D029FF-E836-4B8E-9F9E-037B0532297D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sandbox", "Sandbox\Sandbox.csproj", "{D9D029FF-E836-4B8E-9F9E-037B0532297D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntitiesSection", "EntitiesSection\EntitiesSection.csproj", "{E536B3A0-F2E4-4978-9971-7503573B3368}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EntitiesSection", "EntitiesSection\EntitiesSection.csproj", "{E536B3A0-F2E4-4978-9971-7503573B3368}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FeedSection", "FeedSection\FeedSection.csproj", "{068E3C95-4C6C-4901-A46F-82B65F8B064A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FeedSection", "FeedSection\FeedSection.csproj", "{068E3C95-4C6C-4901-A46F-82B65F8B064A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiscoverySection", "DiscoverySection\DiscoverySection.csproj", "{DFDD654E-04ED-4B22-AA1A-5EC8A76A15BC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DiscoverySection", "DiscoverySection\DiscoverySection.csproj", "{DFDD654E-04ED-4B22-AA1A-5EC8A76A15BC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContentQualitySection", "ContentQualitySection\ContentQualitySection.csproj", "{6D402BBB-63EB-4B4A-AFC5-AC16CD0B8F87}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -42,5 +47,15 @@ Global
 		{DFDD654E-04ED-4B22-AA1A-5EC8A76A15BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DFDD654E-04ED-4B22-AA1A-5EC8A76A15BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DFDD654E-04ED-4B22-AA1A-5EC8A76A15BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D402BBB-63EB-4B4A-AFC5-AC16CD0B8F87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D402BBB-63EB-4B4A-AFC5-AC16CD0B8F87}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D402BBB-63EB-4B4A-AFC5-AC16CD0B8F87}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D402BBB-63EB-4B4A-AFC5-AC16CD0B8F87}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0009552D-1CA2-4BE8-B089-DDC8C9866672}
 	EndGlobalSection
 EndGlobal
