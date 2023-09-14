@@ -12,7 +12,7 @@ public class AppFileContext : IDataContext
     public IFileSet<User, Guid> Users { get; }
     public IFileSet<BlogPost, Guid> Posts { get; }
     public IFileSet<PostView, Guid> PostViews { get; }
-    public readonly IFileSet<UserCredentials, Guid> UserCredentials;
+    public IFileSet<UserCredentials, Guid> UserCredentials { get; }
 
     public AppFileContext(string folderPath)
     {
