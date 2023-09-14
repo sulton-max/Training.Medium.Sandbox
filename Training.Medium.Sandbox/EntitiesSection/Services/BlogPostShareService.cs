@@ -24,18 +24,18 @@ namespace EntitiesSection.Services
 
         public IQueryable<BlogPostShare> Get(Expression<Func<BlogPostShare, bool>> predicate)
         {
-            return _appDataContext.Sharings.Where(predicate.Compile()).AsQueryable();
+            return _appDataContext.PostShares.Where(predicate.Compile()).AsQueryable();
         }
 
         public ValueTask<ICollection<BlogPostShare>> GetAsync(IEnumerable<Guid> ids)
         {
-            var sharing = _appDataContext.Sharings.Where(sharings => ids.Contains(sharings.Id));
+            var sharing = _appDataContext.PostShares.Where(sharings => ids.Contains(sharings.Id));
             return new ValueTask<ICollection<BlogPostShare>>(sharing.ToList());
         }
 
         public ValueTask<BlogPostShare?> GetByIdAsync(Guid id)
         {
-            var sharing = _appDataContext.Sharings.FirstOrDefault(sharing => sharing.Id == id);
+            var sharing = _appDataContext.PostShares.FirstOrDefault(sharing => sharing.Id == id);
             return new ValueTask<BlogPostShare?>(sharing);
         }
 
@@ -44,7 +44,7 @@ namespace EntitiesSection.Services
             // var validation = ValidateOnCreate(user);
             // if (validation is not null) throw validation;
 
-            await _appDataContext.Sharings.AddAsync(sharing);
+            await _appDataContext.PostShares.AddAsync(sharing);
 
             if (saveChanges)
                 await _appDataContext.SaveChangesAsync();
@@ -54,7 +54,7 @@ namespace EntitiesSection.Services
 
         public async ValueTask<BlogPostShare> UpdateAsync(BlogPostShare sharing, bool saveChanges = true)
         {
-            var foundSharing = _appDataContext.Sharings
+            var foundSharing = _appDataContext.PostShares
                 .FirstOrDefault(searchingSharing => searchingSharing.Id == sharing.Id);
 
             if (sharing is null)
