@@ -39,7 +39,7 @@ namespace EntitiesSection.Services
             return new ValueTask<BlogPostShare?>(sharing);
         }
 
-        public async ValueTask<BlogPostShare> CreateAsync(BlogPostShare sharing, bool saveChanges = true)
+        public async ValueTask<BlogPostShare> SendAsync(BlogPostShare sharing, bool saveChanges = true)
         {
             // var validation = ValidateOnCreate(user);
             // if (validation is not null) throw validation;
@@ -52,41 +52,7 @@ namespace EntitiesSection.Services
             return sharing;
         }
 
-        public async ValueTask<BlogPostShare> UpdateAsync(BlogPostShare sharing, bool saveChanges = true)
-        {
-            var foundSharing = _appDataContext.PostShares
-                .FirstOrDefault(searchingSharing => searchingSharing.Id == sharing.Id);
-
-            if (sharing is null)
-                throw new InvalidOperationException("Sharing not found");
-
-            foundSharing.UserId = sharing.UserId;
-            foundSharing.ShareTo = sharing.ShareTo;
-
-            await _appDataContext.SaveChangesAsync();
-            return foundSharing;
-        }
-
-        public async ValueTask<BlogPostShare> DeleteAsync(BlogPostShare sharing, bool saveChanges = true)
-        {
-            var foundSharing = await GetByIdAsync(sharing.Id);
-            if (foundSharing is null)
-                throw new InvalidOperationException("Sharing not found");
-
-            await _appDataContext.SaveChangesAsync();
-            return foundSharing;
-        }
-
-        public async ValueTask<BlogPostShare> DeleteAsync(Guid id, bool saveChanges = true)
-        {
-            var foundSharing = await GetByIdAsync(id);
-            if (foundSharing is null)
-                throw new InvalidOperationException("Sharing not found");
-
-            foundSharing.IsDeleted = true;
-            await _appDataContext.SaveChangesAsync();
-            return foundSharing;
-        }
+       
         
         //private ValidationException? ValidateOnCreate(BlogPostShare sharing)
         //{
