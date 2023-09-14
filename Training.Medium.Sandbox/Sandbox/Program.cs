@@ -1,11 +1,10 @@
 ﻿using Sandbox.Data.Context;
-using Sandbox.Data.SeedData;
+using Shared.Data.SeedData;
 
 var context = TestingContext.Instance;
-await context.InitializeAsync();
+await context.InitializeSeedDataAsync();
 
-var users = await context.Users.ToListAsync();
-foreach (var user in users)
+foreach(var post in context.Posts)
 {
-    Console.WriteLine(user);
+    Console.WriteLine(post);
 }

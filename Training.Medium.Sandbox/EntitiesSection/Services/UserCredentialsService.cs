@@ -2,6 +2,7 @@
 using Shared.DataAccess.Contexts;
 using Shared.Models.Entities;
 using System.Linq.Expressions;
+using System.Text.RegularExpressions;
 
 namespace EntitiesSection.Services;
 
@@ -55,5 +56,32 @@ public class UserCredentialsService : IUserCredentialsService
     public ValueTask<UserCredentials> UpdateAsync(UserCredentials userCredentials, bool saveChanges = true)
     {
         throw new NotImplementedException();
+    }
+
+    private bool IsValidCreatedUser(UserCredentials userCredentials)
+    {
+        var existingUserCredentials =
+            _appDataContext.UserCredentials.FirstOrDefault(x => x.UserId == userCredentials.UserId);
+        if (existingUserCredentials == null)
+        {
+            return false; 
+        }
+        return true;
+    }
+    private bool IsValidUpdatedUser(UserCredentials userCredentials, string newpassword)
+    {
+        var existingUserCRedintials =
+            _appDataContext.UserCredentials.FirstOrDefault(x => x.UserId == userCredentials.UserId);
+        if (existingUserCRedintials == null)
+        {
+            return false;
+        }
+
+        const string passwordPattern = @"^(.{0,7}|[^0-9]*|[^A-Z])$";
+        if (!Regex.IsMatch(newpassword, passwordPattern))
+        {
+            return false;
+        }
+        return true;
     }
 }

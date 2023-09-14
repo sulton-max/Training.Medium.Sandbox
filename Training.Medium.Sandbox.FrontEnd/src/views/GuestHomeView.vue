@@ -1,7 +1,7 @@
 <template>
 
   <!-- Header -->
-  <header class="bg-guest-view-primary w-full py-[25px] px-14 border-b border-black flex justify-center">
+  <header class="bg-guest-view-primary w-full py-[18px] px-14 border-b border-black flex justify-center">
 
     <div class="max-w-[1192px] w-full flex justify-between items-center">
 
@@ -21,7 +21,7 @@
         <RouterLink class="text-[14px]" to="/">Membership</RouterLink>
         <RouterLink class="text-[14px]" to="/">Write</RouterLink>
         <RouterLink class="text-[14px]" to="/">Sign In</RouterLink>
-        <button class="rounded-full bg-black text-slate-200 p-2 px-4 bg-opacity-90">Get started</button>
+        <button class="rounded-full bg-black text-slate-200 p-2 px-4 h-[38px] text-sm font-main bg-opacity-90">Get started</button>
       </nav>
 
     </div>
@@ -35,13 +35,12 @@
 
       <h2 class="font-times text-[106px] font-medium">Stay curious.</h2>
 
-      <h5>
+      <h5 class="text-[24px] loading-loose">
         Discover stories, thinking, and expertise from writers on any topic.
       </h5>
 
-      <button class="p-3 text-xl rounded-full bg-black text-slate-200">
+      <button class="p-12 py-[7px] w-fit font-semibold text-xl rounded-full bg-black text-slate-200">
         Start reading
-
       </button>
     </div>
 
