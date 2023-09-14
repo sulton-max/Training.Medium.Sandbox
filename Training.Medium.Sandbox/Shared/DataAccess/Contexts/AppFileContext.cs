@@ -8,7 +8,7 @@ namespace Shared.DataAccess.Contexts;
 
 public abstract class AppFileContext
 {
-    public readonly IFileSet<BlogPostShare, Guid> Users;
+    public readonly IFileSet<User, Guid> Users;
     public readonly IFileSet<BlogPost, Guid> Posts;
     public readonly IFileSet<BlogPostShare, Guid> Sharings;
 
@@ -17,7 +17,7 @@ public abstract class AppFileContext
         var serializer = new JsonSerializer();
         var provider = new HumanizerPluralizationProvider();
 
-        Users = new FileSet<BlogPostShare, Guid>(folderPath, serializer, provider);
+        Users = new FileSet<User, Guid>(folderPath, serializer, provider);
         Posts = new FileSet<BlogPost, Guid>(folderPath, serializer, provider);
         Sharings = new FileSet<BlogPostShare, Guid>(folderPath, serializer, provider);
     }

@@ -1,6 +1,7 @@
 ﻿using Bogus;
 using Sandbox.Data.Context;
 using Shared.DataAccess.Contexts;
+using Shared.Models.Common;
 using Shared.Models.Entities;
 
 namespace Sandbox.Data.SeedData;
@@ -15,6 +16,9 @@ public static class SeedData
         if (!fileContext.Posts.Any())
             await fileContext.Posts.AddRangeAsync(GetBlogPostFaker(fileContext).Generate(100));
 
+        if (!fileContext.Sharings.Any())
+            await fileContext.Sharings.AddRangeAsync(GetBlogPostShareFaker(fileContext).Generate(50));
+       
         await fileContext.SaveChangesAsync();
     }
 
@@ -26,12 +30,22 @@ public static class SeedData
             .RuleFor(keySelector => keySelector.AuthorId, source => source.PickRandom(context.Users.Select(user => user.Id)));
     }
 
-    private static Faker<BlogPostShare> GetUserFaker()
+    private static Faker<User> GetUserFaker()
     {
-        return new Faker<BlogPostShare>().RuleFor(property => property.Id, Guid.NewGuid)
+        return new Faker<User>().RuleFor(property => property.Id, Guid.NewGuid)
             .RuleFor(property => property.FirstName, source => source.Person.FirstName)
             .RuleFor(property => property.LastName, source => source.Person.LastName)
             .RuleFor(property => property.EmailAddress, source => source.Person.Email);
+    }
+
+    private static Faker<BlogPostShare> GetBlogPostShareFaker(AppFileContext context) 
+    {
+        return new Faker<BlogPostShare>()
+            .RuleFor(sharing => sharing.UserId, source => source.PickRandom(context.Users.Select(user => user.Id)))
+            .RuleFor(sharing => sharing.BlogPostId, source => source.PickRandom(context.Posts
+                                                                                                        .Select(post => post.Id)))
+            .RuleFor(sharing => sharing.ShareTo, source => source
+                                    .PickRandom(SocialMedia.WhatsApp, SocialMedia.Massenger, SocialMedia.LinkedIn, SocialMedia.Telegram));
     }
 }
 //
