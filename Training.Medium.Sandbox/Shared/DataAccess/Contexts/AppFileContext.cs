@@ -36,4 +36,9 @@ public class AppFileContext : IDataContext
         await Posts.SaveChangesAsync();
         await PostViews.SaveChangesAsync();
     }
+
+    public ValueTask DisposeAsync()
+    {
+        return new ValueTask(Task.CompletedTask);
+    }
 }

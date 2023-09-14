@@ -7,6 +7,11 @@ public class PostView : SoftDeletedEntity
     public Guid PostId { get; set; }
     public Guid UserId { get; set; }
 
+    public PostView()
+    {
+
+    }
+
     public PostView(Guid postId, Guid userId)
     {
         PostId = postId;

@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using EntitiesSection.Services.Interfaces;
+using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
+using Shared.DataAccess.Contexts;
 
 namespace Sandbox.Api.Controllers;
 
@@ -6,12 +9,22 @@ namespace Sandbox.Api.Controllers;
 [Route("api/[controller]")]
 public class PostsController : ControllerBase
 {
+    private readonly IPostService _postService;
+    private readonly IPostViewService _postViewService;
+
+    public PostsController(IPostService postService, IPostViewService postViewService)
+    {
+        _postService = postService;
+        _postViewService = postViewService;
+    }
+
     #region Posts
 
     [HttpGet]
-    public IActionResult GetPosts()
+    public IActionResult GetPosts([FromServices] IPostService postService)
     {
-        throw new NotImplementedException();
+        var result = postService.Get(post => true);
+        return Ok(result);
     }
 
     [HttpGet("{postId:guid}")]
@@ -123,9 +136,10 @@ public class PostsController : ControllerBase
     #region Post views
 
     [HttpPost("{postId:guid}/views")]
-    public IActionResult AddPostView([FromBody]Guid userId)
+    public IActionResult AddPostView([FromBody] Guid postId)
     {
-        throw new NotImplementedException();
+        var result = _postViewService.GetByPostId(postId);
+        return Ok(result);
     }
 
     #endregion
@@ -189,5 +203,4 @@ public class PostsController : ControllerBase
     }
 
     #endregion
-
 }

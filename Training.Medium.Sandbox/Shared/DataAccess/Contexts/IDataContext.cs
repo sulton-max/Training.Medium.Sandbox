@@ -3,9 +3,11 @@ using Shared.Models.Entities;
 
 namespace Shared.DataAccess.Contexts;
 
-public interface IDataContext
+public interface IDataContext : IAsyncDisposable
 {
     IFileSet<User, Guid> Users { get; }
     IFileSet<BlogPost, Guid> Posts { get; }
     IFileSet<PostView, Guid> PostViews { get; }
+
+    ValueTask SaveChangesAsync();
 }

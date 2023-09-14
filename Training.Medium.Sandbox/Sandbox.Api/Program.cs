@@ -5,6 +5,7 @@ using MembershipSection.Services.Interfaces;
 using NotificationsSection.Services;
 using NotificationsSection.Services.Interfaces;
 using Sandbox.Api.Settings;
+using Shared.Data.SeedData;
 using Shared.DataAccess.Contexts;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,7 +14,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSingleton<IValidationService, ValidationService>();
 
 // data access
-// builder.Services.AddScoped<IDataContext, AppFileContext>(_ => new AppFileContext(builder.Environment.ContentRootPath));
+builder.Services.AddScoped<IDataContext, AppFileContext>(_ => new AppFileContext(builder.Environment.ContentRootPath));
 
 // TODO : remove this
 builder.Services.AddScoped<AppFileContext>(_ => new AppFileContext(builder.Environment.ContentRootPath));
@@ -43,6 +44,12 @@ builder.Services.AddControllers();
 builder.Services.AddRouting(options => options.LowercaseUrls = true);
 
 var app = builder.Build();
+
+if (app.Environment.IsDevelopment())
+{
+    await using var dataContext = app.Services.CreateAsyncScope().ServiceProvider.GetRequiredService<IDataContext>();
+    await dataContext.InitializeSeedDataAsync();
+}
 
 app.UseSwagger();
 app.UseSwaggerUI();
