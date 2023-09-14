@@ -7,6 +7,8 @@ public class Author
     public Guid UserId { get; set; }
     public string Name { get; set; }
     public string About { get; set; }
+    
+    public string Image { get; set; }
 
     public Author()
     {
