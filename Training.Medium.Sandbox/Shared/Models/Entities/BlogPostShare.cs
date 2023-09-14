@@ -9,5 +9,6 @@ namespace Shared.Models.Entities
 {
     internal class BlogPostShare : SoftDeletedEntity
     {
+
     }
 }
