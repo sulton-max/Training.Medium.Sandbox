@@ -13,7 +13,7 @@ public class User : SoftDeletedEntity
 
     public User()
     {
-        
+
     }
 
     public User(Guid id, string firstName, string lastName, string emailAddress, string phoneNumber)
@@ -30,12 +30,12 @@ public class User : SoftDeletedEntity
 
     public override int GetHashCode()
     {
-        return HashCode.Combine(this.Id + this.FirstName, this.LastName, this.CreatedDate, this.DeletedDate, this.PhoneNumber, this.EmailAddress);
+        return HashCode.Combine(FirstName, LastName, CreatedDate, DeletedDate, PhoneNumber, EmailAddress);
     }
 
     public override bool Equals(object? obj)
     {
-        return this.GetHashCode().Equals(obj.GetHashCode());
+        return obj is User user && user.GetHashCode().Equals(GetHashCode());
     }
 
     public override string ToString()

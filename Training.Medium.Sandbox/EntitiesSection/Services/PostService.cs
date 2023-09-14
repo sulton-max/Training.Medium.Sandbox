@@ -1,16 +1,11 @@
 ﻿using EntitiesSection.Services.Interfaces;
 using Shared.DataAccess.Contexts;
 using Shared.Models.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EntitiesSection.Services
 {
-    internal class PostService : IPostService
+    public class PostService : IPostService
     {
         private readonly AppFileContext _appDataContext;
         //private readonly IValidationService _validationService;
@@ -81,6 +76,44 @@ namespace EntitiesSection.Services
 
             await _appDataContext.SaveChangesAsync();
             return foundPost;
+        }
+
+        private bool ValidateOnCreate(BlogPost blogPost)
+        {
+            var result = _appDataContext.Posts.FirstOrDefault(x => x.IsDeleted == false && x.Title == blogPost.Title && x.Content == blogPost.Content && x.AuthorId == blogPost.AuthorId && x.Id == blogPost.Id);
+            return result != null;
+        }
+
+        private bool ValidateOnUpdate(BlogPost blogPost)
+        {
+            var existingPost = _appDataContext.Posts.FirstOrDefault(x => x.Id == blogPost.Id && x.IsDeleted == false);
+            if (existingPost == null)
+            {
+                return false;
+            }
+            bool isTitleUnique = !_appDataContext.Posts.Any(x => 
+                x.Id != blogPost.Id &&
+                x.IsDeleted == false &&
+                x.Title == blogPost.Title
+            );
+            if (!isTitleUnique)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        private bool ValidatePost(BlogPost blogPost)
+        {
+            if (string.IsNullOrEmpty(blogPost.Title))
+            {
+                return false;
+            }
+            if (string.IsNullOrEmpty(blogPost.Content))
+            {
+                return false;
+            }
+            return true;
         }
     }
 }

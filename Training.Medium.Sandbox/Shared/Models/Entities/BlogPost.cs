@@ -1,4 +1,4 @@
-using Shared.Models.Common;
+﻿using Shared.Models.Common;
 using System.Reflection.Metadata;
 
 namespace Shared.Models.Entities;
@@ -21,4 +21,18 @@ public class BlogPost : SoftDeletedEntity
     public string Content { get; set; }
     public Guid AuthorId { get; set; }
 
+    public override int GetHashCode()
+    {
+        return HashCode.Combine(Title, Content);
+    }
+
+    public override bool Equals(object? obj)
+    {
+        return obj is BlogPost blogPost && blogPost.GetHashCode().Equals(GetHashCode());
+    }
+
+    public override string ToString()
+    {
+        return $"Id: {Id}, Title: {Title}, AuthorId: {AuthorId}\n";
+    }
 }
