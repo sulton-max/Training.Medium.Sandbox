@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 
 namespace EntitiesSection.Services
 {
-    internal class PostService : IPostService
+    public class PostService : IPostService
     {
         private readonly AppFileContext _appDataContext;
         //private readonly IValidationService _validationService;
@@ -78,18 +78,41 @@ namespace EntitiesSection.Services
             return foundPost;
         }
 
-        private bool ValidateOnCreate()
+        private bool ValidateOnCreate(BlogPost blogPost)
         {
+            var result = _appDataContext.Posts.FirstOrDefault(x => x.IsDeleted == false && x.Title == blogPost.Title && x.Content == blogPost.Content && x.AuthorId == blogPost.AuthorId && x.Id == blogPost.Id);
+            return result != null;
+        }
+
+        private bool ValidateOnUpdate(BlogPost blogPost)
+        {
+            var existingPost = _appDataContext.Posts.FirstOrDefault(x => x.Id == blogPost.Id && x.IsDeleted == false);
+            if (existingPost == null)
+            {
+                return false;
+            }
+            bool isTitleUnique = !_appDataContext.Posts.Any(x => 
+                x.Id != blogPost.Id &&
+                x.IsDeleted == false &&
+                x.Title == blogPost.Title
+            );
+            if (!isTitleUnique)
+            {
+                return false;
+            }
             return true;
         }
 
-        public bool ValidateOnUpdate()
+        private bool ValidatePost(BlogPost blogPost)
         {
-            return true;
-        }
-
-        public bool ValidatePost()
-        {
+            if (string.IsNullOrEmpty(blogPost.Title))
+            {
+                return false;
+            }
+            if (string.IsNullOrEmpty(blogPost.Content))
+            {
+                return false;
+            }
             return true;
         }
     }

@@ -1,20 +1,22 @@
 ﻿using Bogus;
-using Sandbox.Data.Context;
 using Shared.DataAccess.Contexts;
 using Shared.Models.Common;
 using Shared.Models.Entities;
 
-namespace Sandbox.Data.SeedData;
+namespace Shared.Data.SeedData;
 
 public static class SeedData
 {
-    public static async ValueTask InitializeAsync(this AppFileContext fileContext)
+    public static async ValueTask InitializeSeedDataAsync(this IDataContext fileContext)
     {
         if (!fileContext.Users.Any())
-            await fileContext.Users.AddRangeAsync(GetUserFaker().Generate(10_000));
+            await fileContext.AddAsync<User>(1000);
 
         if (!fileContext.Posts.Any())
-            await fileContext.Posts.AddRangeAsync(GetBlogPostFaker(fileContext).Generate(100));
+            await fileContext.AddAsync<BlogPost>(1000);
+
+        if (!fileContext.PostViews.Any())
+            await fileContext.AddAsync<PostView>(1000);
 
         if (!fileContext.Sharings.Any())
             await fileContext.Sharings.AddRangeAsync(GetBlogPostShareFaker(fileContext).Generate(50));
@@ -22,20 +24,44 @@ public static class SeedData
         await fileContext.SaveChangesAsync();
     }
 
-    private static Faker<BlogPost> GetBlogPostFaker(AppFileContext context)
+    private static async ValueTask AddAsync<TEntity>(this IDataContext context, int count) where TEntity : IEntity
     {
-        return new Faker<BlogPost>().RuleFor(keySelector => keySelector.Id, Guid.NewGuid)
-            .RuleFor(keySelector => keySelector.Title, source => source.Lorem.Text())
-            .RuleFor(keySelector => keySelector.Content, source => source.Lorem.Paragraph(5))
-            .RuleFor(keySelector => keySelector.AuthorId, source => source.PickRandom(context.Users.Select(user => user.Id)));
+        var task = typeof(TEntity) switch
+        {
+            { } t when t == typeof(User) => context.AddUsersAsync(count),
+            { } t when t == typeof(BlogPost) => context.AddPostsAsync(count),
+            { } t when t == typeof(PostView) => context.AddPostViewsAsync(count),
+            _ => new ValueTask(Task.CompletedTask)
+        };
+
+        await task;
     }
 
-    private static Faker<User> GetUserFaker()
+    private static async ValueTask AddUsersAsync(this IDataContext context, int count)
     {
-        return new Faker<User>().RuleFor(property => property.Id, Guid.NewGuid)
-            .RuleFor(property => property.FirstName, source => source.Person.FirstName)
-            .RuleFor(property => property.LastName, source => source.Person.LastName)
-            .RuleFor(property => property.EmailAddress, source => source.Person.Email);
+        var faker = EntityFakers.GetUserFaker(context);
+        var uniqueUsers = new HashSet<User>(faker.Generate(100_000));
+
+        await context.Users.AddRangeAsync(uniqueUsers.Take(count));
+        await context.SaveChangesAsync();
+    }
+
+    private static async ValueTask AddPostsAsync(this IDataContext context, int count)
+    {
+        var faker = EntityFakers.GetBlogPostFaker(context);
+        var uniquePosts = new HashSet<BlogPost>(faker.Generate(100_000));
+
+        await context.Posts.AddRangeAsync(uniquePosts.Take(count));
+        await context.SaveChangesAsync();
+    }
+
+    private static async ValueTask AddPostViewsAsync(this IDataContext context, int count)
+    {
+        var faker = EntityFakers.GetPostViewFaker(context);
+        var uniquePostViews = new HashSet<PostView>(faker.Generate(100_000));
+
+        await context.PostViews.AddRangeAsync(uniquePostViews.Take(count));
+        await context.SaveChangesAsync();
     }
 
     private static Faker<BlogPostShare> GetBlogPostShareFaker(AppFileContext context) 
@@ -48,6 +74,7 @@ public static class SeedData
                                     .PickRandom(SocialMedia.WhatsApp, SocialMedia.Massenger, SocialMedia.LinkedIn, SocialMedia.Telegram));
     }
 }
+
 //
 // using DiscoverySection.DataAccess;
 // using DiscoverySection.Models;
@@ -56,7 +83,7 @@ public static class SeedData
 //
 // public static class SeedData
 // {
-//     public static async ValueTask InitializeAsync(this AppDataContext appDataContext)
+//     public static async ValueTask InitializeSeedDataAsync(this AppDataContext appDataContext)
 //     {
 //         if (!appDataContext.Users.Any())
 //             await appDataContext.Users.AddRangeAsync(Users);
