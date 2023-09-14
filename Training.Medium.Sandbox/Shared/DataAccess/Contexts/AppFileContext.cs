@@ -15,6 +15,7 @@ public class AppFileContext : IDataContext
     public IFileSet<UserCredentials, Guid> UserCredentials { get; }
     public readonly IFileSet<EmailTemplate, Guid> EmailTemplates;
     public IFileSet<BlogPostShare, Guid> PostShares { get; }
+    public IFileSet<PostFeedback, Guid> PostFeedbacks { get; }
 
     public AppFileContext(string folderPath)
     {
