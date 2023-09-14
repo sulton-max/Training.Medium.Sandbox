@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Shared.DataAccess.Contexts;
+using Shared.Models.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +10,11 @@ namespace DiscoverySection.Services.PopuplarPostService
 {
     public class PopularPostService : IPopularPostService
     {
+        public PopularPostService(IDataContext dataContext)
+        {
+            
+        }
+
         public List<BlogPost> GetPopularPosts()
         {
             return new List<BlogPost>();
