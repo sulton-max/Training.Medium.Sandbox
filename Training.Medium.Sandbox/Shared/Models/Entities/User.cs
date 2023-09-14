@@ -13,7 +13,7 @@ public class User : SoftDeletedEntity
 
     public User()
     {
-        
+
     }
 
     public User(Guid id, string firstName, string lastName, string emailAddress, string phoneNumber)

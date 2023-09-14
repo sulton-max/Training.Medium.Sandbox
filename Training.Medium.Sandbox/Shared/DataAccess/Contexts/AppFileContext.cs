@@ -13,6 +13,8 @@ public class AppFileContext : IDataContext
     public IFileSet<BlogPost, Guid> Posts { get; }
     public IFileSet<PostView, Guid> PostViews { get; }
     public IFileSet<UserCredentials, Guid> UserCredentials { get; }
+    public readonly IFileSet<BlogPostShare, Guid> Sharings;
+    public readonly IFileSet<EmailTemplate, Guid> EmailTemplates;
 
     public AppFileContext(string folderPath)
     {
@@ -23,6 +25,8 @@ public class AppFileContext : IDataContext
         Posts = new FileSet<BlogPost, Guid>(folderPath, serializer, provider);
         PostViews = new FileSet<PostView, Guid>(folderPath, serializer, provider);
         UserCredentials = new FileSet<UserCredentials, Guid>(folderPath, serializer, provider);
+        Sharings = new FileSet<BlogPostShare, Guid>(folderPath, serializer, provider);
+        EmailTemplates = new FileSet<EmailTemplate, Guid>(folderPath, serializer, provider);
     }
 
     public virtual async ValueTask FetchAsync()
@@ -31,6 +35,8 @@ public class AppFileContext : IDataContext
         await Posts.FetchAsync();
         await PostViews.FetchAsync();
         await UserCredentials.FetchAsync();
+        await Sharings.FetchAsync();
+        await EmailTemplates.FetchAsync();
     }
 
     public virtual async ValueTask SaveChangesAsync()
@@ -39,6 +45,8 @@ public class AppFileContext : IDataContext
         await Posts.SaveChangesAsync();
         await PostViews.SaveChangesAsync();
         await UserCredentials.SaveChangesAsync();
+        await Sharings.SaveChangesAsync();
+        await EmailTemplates.SaveChangesAsync();
     }
 
     public ValueTask DisposeAsync()
