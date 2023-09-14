@@ -4,19 +4,19 @@ namespace Shared.Models.Entities;
 
 using FileContext.Abstractions.Models.Entity;
 
-public class User : SoftDeletedEntity
+public class BlogPostShare : SoftDeletedEntity
 {
     public string FirstName { get; set; }
     public string LastName { get; set; }
     public string EmailAddress { get; set; }
     public string PhoneNumber { get; set; }
 
-    public User()
-    {
+    //public BlogPostShare()
+    //{
         
-    }
+    //}
 
-    public User(Guid id, string firstName, string lastName, string emailAddress, string phoneNumber)
+    public BlogPostShare(Guid id, string firstName, string lastName, string emailAddress, string phoneNumber)
     {
         Id = id;
         FirstName = firstName;

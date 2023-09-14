@@ -7,8 +7,10 @@ using System.Threading.Tasks;
 
 namespace Shared.Models.Entities
 {
-    internal class BlogPostShare : SoftDeletedEntity
+    public class BlogPostShare : SoftDeletedEntity
     {
-
+        public BlogPostShare UserId { get; set; }
+        public BlogPost BlogPostId { get; set; }
+        public SocialMedia ShareTo { get; set; }
     }
 }

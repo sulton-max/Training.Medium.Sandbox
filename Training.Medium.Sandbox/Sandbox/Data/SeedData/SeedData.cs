@@ -26,9 +26,9 @@ public static class SeedData
             .RuleFor(keySelector => keySelector.AuthorId, source => source.PickRandom(context.Users.Select(user => user.Id)));
     }
 
-    private static Faker<User> GetUserFaker()
+    private static Faker<BlogPostShare> GetUserFaker()
     {
-        return new Faker<User>().RuleFor(property => property.Id, Guid.NewGuid)
+        return new Faker<BlogPostShare>().RuleFor(property => property.Id, Guid.NewGuid)
             .RuleFor(property => property.FirstName, source => source.Person.FirstName)
             .RuleFor(property => property.LastName, source => source.Person.LastName)
             .RuleFor(property => property.EmailAddress, source => source.Person.Email);

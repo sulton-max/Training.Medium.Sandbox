@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace Shared.Models.Common
 {
-    internal class SocialMedia
+    public enum SocialMedia
     {
+        Telegram,
+        Massenger, 
+        WhatsApp,
+        LinkedIn
     }
 }
