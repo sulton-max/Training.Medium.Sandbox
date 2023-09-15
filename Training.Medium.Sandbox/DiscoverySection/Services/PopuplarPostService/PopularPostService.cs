@@ -10,6 +10,7 @@ namespace DiscoverySection.Services.PopuplarPostService
         private readonly IPostService _postService;
         private readonly IPostShareService _postShareService;
         private readonly IPostCommentService _commentService;
+        private readonly IPostDetailsService _postDetailsService;
         private readonly IPostViewService _viewService;
 
         public PopularPostService
@@ -18,6 +19,7 @@ namespace DiscoverySection.Services.PopuplarPostService
             IPostService postService,
             IPostShareService postShareService,
             IPostCommentService postCommentService,
+            IPostDetailsService postDetailsService,
             IPostViewService postViewService
         )
         {
@@ -25,8 +27,8 @@ namespace DiscoverySection.Services.PopuplarPostService
             _postService = postService;
             _postShareService = postShareService;
             _commentService = postCommentService;
+            _postDetailsService = postDetailsService;
             _viewService = postViewService;
-
         }
 
         public ValueTask<List<BlogPost>> GetPopularPostsAsync()
@@ -35,7 +37,8 @@ namespace DiscoverySection.Services.PopuplarPostService
             var postViewsQuery = _viewService.Get(post => true);
             var postCommentsQuery = _commentService.Get(post => true);
             var postShareQuery = _postShareService.Get(post => true);
-
+            var postDetailsQuery = _postDetailsService.Get(post => true);
+            
             var posts = _postService.Get(post => true).ToList();
             return new ValueTask<List<BlogPost>>(posts);
         }
