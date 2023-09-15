@@ -29,6 +29,7 @@ builder.Services.AddScoped<IUserService, UserService>();
 
 // posts
 builder.Services.AddScoped<IPostService, PostService>();
+builder.Services.AddScoped<IPostDetailsService, PostDetailsService>();
 builder.Services.AddScoped<IPostViewService, PostViewService>();
 builder.Services.AddScoped<IPostShareService, PostShareService>();
 builder.Services.AddScoped<IPostViewService, PostViewService>();

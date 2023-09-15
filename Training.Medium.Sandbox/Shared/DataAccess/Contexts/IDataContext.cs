@@ -13,7 +13,7 @@ public interface IDataContext : IAsyncDisposable
     IFileSet<EmailTemplate, Guid> EmailTemplates { get; }
     IFileSet<BlogPostShare, Guid> PostShares { get; }
     IFileSet<PostFeedback, Guid> PostFeedbacks { get; }
-
+    IFileSet<PostDetails, Guid> PostDetails { get; }
 
     ValueTask SaveChangesAsync();
 }
