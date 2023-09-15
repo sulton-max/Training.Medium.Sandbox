@@ -1,4 +1,4 @@
-﻿using EntitiesSection.Services.Interfaces;
+using EntitiesSection.Services.Interfaces;
 using Shared.DataAccess.Contexts;
 using Shared.Models.Entities;
 using System.Linq.Expressions;
@@ -38,9 +38,8 @@ public class UserCredentialsService : IUserCredentialsService
     }
 
     public IQueryable<UserCredentials> Get(Expression<Func<UserCredentials, bool>> predicate)
-    {
-        return _appDataContext.UserCredentials.Where(predicate.Compile()).AsQueryable();
-    }
+        => _appDataContext.UserCredentials.Where(predicate.Compile()).AsQueryable();
+    
 
     public ValueTask<ICollection<UserCredentials>> Get(IEnumerable<Guid> id)
     {
@@ -49,8 +48,11 @@ public class UserCredentialsService : IUserCredentialsService
 
     public async ValueTask<UserCredentials> GetById(Guid id)
     {
-        return await _appDataContext.UserCredentials.FindAsync(id);
+        var userCredentials = await _appDataContext.UserCredentials.FindAsync(id);
+        if (userCredentials == null)
+            throw new ArgumentOutOfRangeException(nameof(id), "User Credentails not found!");
 
+        return userCredentials;
     }
 
     public ValueTask<UserCredentials> UpdateAsync(UserCredentials userCredentials, bool saveChanges = true)
