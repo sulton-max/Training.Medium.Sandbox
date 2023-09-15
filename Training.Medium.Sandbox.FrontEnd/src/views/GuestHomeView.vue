@@ -1,7 +1,7 @@
 <template>
 
   <!-- Header -->
-  <header class="bg-guest-view-primary w-full py-[18px] px-14 border-b border-black flex justify-center">
+  <header class="fixed bg-guest-view-primary w-full py-[18px] px-14 border-b border-black flex justify-center">
 
     <div class="max-w-[1192px] w-full flex justify-between items-center">
 
@@ -21,7 +21,9 @@
         <RouterLink class="text-[14px]" to="/">Membership</RouterLink>
         <RouterLink class="text-[14px]" to="/">Write</RouterLink>
         <RouterLink class="text-[14px]" to="/">Sign In</RouterLink>
-        <button class="rounded-full bg-black text-slate-200 p-2 px-4 h-[38px] text-sm font-main bg-opacity-90">Get started</button>
+        <button class="rounded-full bg-black text-slate-200 p-2 px-4 h-[38px] text-sm font-main bg-opacity-90">Get
+          started
+        </button>
       </nav>
 
     </div>
@@ -29,35 +31,74 @@
   </header>
 
   <!-- Promotions Header -->
-  <article class="bg-guest-view-primary px-14 h-[455px] flex justify-center border-b border-black">
+  <article class="bg-guest-view-primary px-14 pt-[75px] h-[530px] flex justify-center border-b border-black">
 
     <div class="max-w-[1192px] w-full">
 
-    <div class="py-16 w-3/4 flex flex-col">
+      <div class="py-16 w-3/4 flex flex-col">
 
-      <h2 class="font-times text-[106px] font-medium">Stay curious.</h2>
+        <h2 class="font-times text-[106px] font-medium">Stay curious.</h2>
 
-      <h5 class="text-[24px] max-w-md loading-loose">
-        Discover stories, thinking, and expertise from writers on any topic.
-      </h5>
+        <h5 class="text-[24px] max-w-md loading-loose">
+          Discover stories, thinking, and expertise from writers on any topic.
+        </h5>
 
-      <button class="mt-8 p-12 py-[7px] w-fit font-semibold text-xl rounded-full bg-black text-slate-200">
-        Start reading
-      </button>
-    </div>
+        <button class="mt-8 p-12 py-[7px] w-fit font-semibold text-xl rounded-full bg-black text-slate-200">
+          Start reading
+        </button>
+      </div>
 
-<!--    <div class="w-1/2 h-full translate-x-40 relative">-->
-<!--      <promotion-illustration class="absolute h-40 w-40 top-0 left-0"/>-->
-<!--    </div>-->
+      <!--    <div class="w-1/2 h-full translate-x-40 relative">-->
+      <!--      <promotion-illustration class="absolute h-40 w-40 top-0 left-0"/>-->
+      <!--    </div>-->
 
     </div>
 
   </article>
 
+  <!-- Trending Section -->
+  <article class="flex justify-center">
+
+    <div class="max-w-[1192px] pt-[40px] px-[64px]">
+
+      <!-- Trending label -->
+      <div class="mb-[16px]">
+        <div class="flex gap-2 justify-start items-center">
+          <svg width="28" height="29" viewBox="0 0 28 29" fill="none" class="inline-block">
+            <path fill="#fff" d="M0 .8h28v28H0z"></path>
+            <g opacity="0.8" clip-path="url(#trending_svg__clip0)">
+              <path fill="#fff" d="M4 4.8h20v20H4z"></path>
+              <circle cx="14" cy="14.79" r="9.5" stroke="#000"></circle>
+              <path d="M5.46 18.36l4.47-4.48M9.97 13.87l3.67 3.66M13.67 17.53l5.1-5.09M16.62 11.6h3M19.62 11.6v3"
+                    stroke="#000" stroke-linecap="round"></path>
+            </g>
+            <defs>
+              <clipPath id="trending_svg__clip0">
+                <path fill="#fff" transform="translate(4 4.8)" d="M0 0h20v20H0z"></path>
+              </clipPath>
+            </defs>
+          </svg>
+          <span class="font-semibold">Trending on Medium</span>
+        </div>
+      </div>
+
+      <!-- Trending posts grid -->
+      <div class="w-[1192px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <post-card/>
+        <post-card/>
+        <post-card/>
+        <post-card/>
+      </div>
+
+    </div>
+
+
+  </article>
 
 </template>
 
 <script lang="ts" setup>
 
 import PromotionIllustration from "@/assets/logos/PromotionIllustration.vue";
+import PostCard from "@/components/Posts/PostCard.vue";
 </script>
