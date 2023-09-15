@@ -63,5 +63,13 @@ namespace ContentQualitySection.Services
         {
             return word == word.ToLower();
         }
+
+        public int CheckLowerWords(string content)
+        {
+            var words = GetWords(content);
+            var lowerWordsCount = words.Count(word => IsLowerWord(word));
+            return lowerWordsCount;
+        }
+
     }
 }
