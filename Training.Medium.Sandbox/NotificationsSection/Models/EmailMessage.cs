@@ -2,7 +2,6 @@
 
 public class EmailMessage
 {
-    public Guid Id { get; set; }
     public string Subject { get; set; }
     public string Body { get; set; }
     public string FromEmailAddress { get; set; }
