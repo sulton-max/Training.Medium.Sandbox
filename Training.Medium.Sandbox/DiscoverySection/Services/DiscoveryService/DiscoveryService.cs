@@ -1,15 +1,9 @@
 using DiscoverySection.Models;
 using DiscoverySection.Services.PopuplarPostService;
-using DiscoverySection.Services.Trending_PostService;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DiscoverySection.Services.DiscoveryService
 {
-  /*  public class DiscoveryService : IDiscoveryService
+    public class DiscoveryService : IDiscoveryService
     {
         private IPopularPostService _popularPostInstance;
 
@@ -31,5 +25,5 @@ namespace DiscoverySection.Services.DiscoveryService
             var discoveryTopics = new DiscoveryTopics();
             return discoveryTopics;
         }
-    }*/
+    }
 }
