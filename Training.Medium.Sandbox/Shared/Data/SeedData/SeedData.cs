@@ -64,7 +64,7 @@ public static class SeedData
         await context.SaveChangesAsync();
     }
 
-    private static Faker<BlogPostShare> GetBlogPostShareFaker(AppFileContext context) 
+    private static Faker<BlogPostShare> GetBlogPostShareFaker(IDataContext context) 
     {
         return new Faker<BlogPostShare>()
             .RuleFor(sharing => sharing.UserId, source => source.PickRandom(context.Users.Select(user => user.Id)))

@@ -8,9 +8,9 @@ namespace EntitiesSection.Services;
 
 public class EmailTemplateService : IEmailTemplateService
 {
-    private readonly AppFileContext _appDateContext;
+    private readonly IDataContext _appDateContext;
    // private readonly IEmailTemplateService _emailTemplateService;
-    public EmailTemplateService(AppFileContext appDateContext ) //IEmailTemplateService emailTemplateService
+    public EmailTemplateService(IDataContext appDateContext ) //IEmailTemplateService emailTemplateService
     {
         _appDateContext = appDateContext;
         //_emailTemplateService = emailTemplateService;

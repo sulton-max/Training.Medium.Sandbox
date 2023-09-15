@@ -14,7 +14,7 @@ public class AppFileContext : IDataContext
     public IFileSet<BlogPost, Guid> Posts { get; }
     public IFileSet<PostView, Guid> PostViews { get; }
     public IFileSet<UserCredentials, Guid> UserCredentials { get; }
-    public readonly IFileSet<EmailTemplate, Guid> EmailTemplates;
+    public IFileSet<EmailTemplate, Guid> EmailTemplates { get; }
     public IFileSet<BlogPostShare, Guid> PostShares { get; }
     public IFileSet<PostFeedback, Guid> PostFeedbacks { get; }
 

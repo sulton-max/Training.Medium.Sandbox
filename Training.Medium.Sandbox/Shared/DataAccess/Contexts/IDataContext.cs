@@ -5,11 +5,14 @@ namespace Shared.DataAccess.Contexts;
 
 public interface IDataContext : IAsyncDisposable
 {
+    IFileSet<PostComment, Guid> PostComments { get; }
     IFileSet<User, Guid> Users { get; }
     IFileSet<BlogPost, Guid> Posts { get; }
     IFileSet<PostView, Guid> PostViews { get; }
+    IFileSet<UserCredentials, Guid> UserCredentials { get; }
+    IFileSet<EmailTemplate, Guid> EmailTemplates { get; }
+    IFileSet<BlogPostShare, Guid> PostShares { get; }
     IFileSet<PostFeedback, Guid> PostFeedbacks { get; }
-    IFileSet<PostComment, Guid> PostComments { get; }
 
 
     ValueTask SaveChangesAsync();
