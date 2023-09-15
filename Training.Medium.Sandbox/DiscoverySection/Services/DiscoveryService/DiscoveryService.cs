@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DiscoverySection.Services.DiscoveryService
 {
-    public class DiscoveryService : IDiscoveryService
+  /*  public class DiscoveryService : IDiscoveryService
     {
         private IPopularPostService _popularPostInstance;
 
@@ -30,5 +30,5 @@ namespace DiscoverySection.Services.DiscoveryService
             var discoveryTopics = new DiscoveryTopics();
             return discoveryTopics;
         }
-    }
+    }*/
 }
