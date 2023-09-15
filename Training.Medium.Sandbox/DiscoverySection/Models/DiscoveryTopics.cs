@@ -8,13 +8,13 @@ namespace DiscoverySection.Services.Models
 {
     public class DiscoveryTopics
     {
-        public DiscoveryTopics()
+/*        public DiscoveryTopics()
         {
             _topics = new List<string>();
         }
         public List<string> GetAllTopics()
         {
             return _topics.ToList();
-        }
+        }*/
     }
 }
