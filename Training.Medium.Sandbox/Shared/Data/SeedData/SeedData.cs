@@ -17,9 +17,9 @@ public static class SeedData
 
         if (!fileContext.PostViews.Any())
             await fileContext.AddAsync<PostView>(1000);
-
-        if (!fileContext.Sharings.Any())
-            await fileContext.Sharings.AddRangeAsync(GetBlogPostShareFaker(fileContext).Generate(50));
+        //
+        // if (!fileContext.Sharings.Any())
+        //     await fileContext.Sharings.AddRangeAsync(GetBlogPostShareFaker(fileContext).Generate(50));
        
         await fileContext.SaveChangesAsync();
     }

@@ -24,27 +24,27 @@ namespace EntitiesSection.Services
 
         public IQueryable<BlogPostShare> Get(Expression<Func<BlogPostShare, bool>> predicate)
         {
-            return _appDataContext.Sharings.Where(predicate.Compile()).AsQueryable();
+            return _appDataContext.PostShares.Where(predicate.Compile()).AsQueryable();
         }
 
         public ValueTask<ICollection<BlogPostShare>> GetAsync(IEnumerable<Guid> ids)
         {
-            var sharing = _appDataContext.Sharings.Where(sharings => ids.Contains(sharings.Id));
+            var sharing = _appDataContext.PostShares.Where(sharings => ids.Contains(sharings.Id));
             return new ValueTask<ICollection<BlogPostShare>>(sharing.ToList());
         }
 
         public ValueTask<BlogPostShare?> GetByIdAsync(Guid id)
         {
-            var sharing = _appDataContext.Sharings.FirstOrDefault(sharing => sharing.Id == id);
+            var sharing = _appDataContext.PostShares.FirstOrDefault(sharing => sharing.Id == id);
             return new ValueTask<BlogPostShare?>(sharing);
         }
 
-        public async ValueTask<BlogPostShare> CreateAsync(BlogPostShare sharing, bool saveChanges = true)
+        public async ValueTask<BlogPostShare> SendAsync(BlogPostShare sharing, bool saveChanges = true)
         {
             // var validation = ValidateOnCreate(user);
             // if (validation is not null) throw validation;
 
-            await _appDataContext.Sharings.AddAsync(sharing);
+            await _appDataContext.PostShares.AddAsync(sharing);
 
             if (saveChanges)
                 await _appDataContext.SaveChangesAsync();
@@ -52,41 +52,7 @@ namespace EntitiesSection.Services
             return sharing;
         }
 
-        public async ValueTask<BlogPostShare> UpdateAsync(BlogPostShare sharing, bool saveChanges = true)
-        {
-            var foundSharing = _appDataContext.Sharings
-                .FirstOrDefault(searchingSharing => searchingSharing.Id == sharing.Id);
-
-            if (sharing is null)
-                throw new InvalidOperationException("Sharing not found");
-
-            foundSharing.UserId = sharing.UserId;
-            foundSharing.ShareTo = sharing.ShareTo;
-
-            await _appDataContext.SaveChangesAsync();
-            return foundSharing;
-        }
-
-        public async ValueTask<BlogPostShare> DeleteAsync(BlogPostShare sharing, bool saveChanges = true)
-        {
-            var foundSharing = await GetByIdAsync(sharing.Id);
-            if (foundSharing is null)
-                throw new InvalidOperationException("Sharing not found");
-
-            await _appDataContext.SaveChangesAsync();
-            return foundSharing;
-        }
-
-        public async ValueTask<BlogPostShare> DeleteAsync(Guid id, bool saveChanges = true)
-        {
-            var foundSharing = await GetByIdAsync(id);
-            if (foundSharing is null)
-                throw new InvalidOperationException("Sharing not found");
-
-            foundSharing.IsDeleted = true;
-            await _appDataContext.SaveChangesAsync();
-            return foundSharing;
-        }
+       
         
         //private ValidationException? ValidateOnCreate(BlogPostShare sharing)
         //{

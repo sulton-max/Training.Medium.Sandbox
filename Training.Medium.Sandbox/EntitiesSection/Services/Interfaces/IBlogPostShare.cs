@@ -16,12 +16,7 @@ namespace EntitiesSection.Services.Interfaces
 
         ValueTask<BlogPostShare?> GetByIdAsync(Guid id);
 
-        ValueTask<BlogPostShare> CreateAsync(BlogPostShare user, bool saveChanges = true);
-
-        ValueTask<BlogPostShare> UpdateAsync(BlogPostShare user, bool saveChanges = true);
-
-        ValueTask<BlogPostShare> DeleteAsync(Guid id, bool saveChanges = true);
-
-        ValueTask<BlogPostShare> DeleteAsync(BlogPostShare user, bool saveChanges = true);
+        ValueTask<BlogPostShare> SendAsync(BlogPostShare user, bool saveChanges = true);
+        
     }
 }
