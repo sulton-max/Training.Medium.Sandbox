@@ -26,7 +26,7 @@
       <!-- Post content -->
       <div class="px-2 mb-[8px]">
         <div>
-          <h2 class="font-bold line-clamp-2">“Good Commit” vs “Your Commit”: How to Write a Perfect Git Commit
+          <h2 class="font-bold line-clamp-2 text-left">“Good Commit” vs “Your Commit”: How to Write a Perfect Git Commit
             Message</h2>
         </div>
 
@@ -35,10 +35,9 @@
       <!-- Post details -->
       <div>
         <div class="flex gap-1 items-center justify-center">
-          <span>Sep 5</span>
-          <span>·</span>
-          <span>8 min read</span>
-          <span>·</span>
+          <span class="text-sm color-[#6B6B6B]">Sep 5</span>
+          <span class="text-sm color-[#6B6B6B]">·</span>
+          <span class="text-sm color-[#6B6B6B]">8 min read</span>
           <span><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path
               d="M12.4 12.77l-1.81 4.99a.63.63 0 0 1-1.18 0l-1.8-4.99a.63.63 0 0 0-.38-.37l-4.99-1.81a.62.62 0 0 1 0-1.18l4.99-1.8a.63.63 0 0 0 .37-.38l1.81-4.99a.63.63 0 0 1 1.18 0l1.8 4.99a.63.63 0 0 0 .38.37l4.99 1.81a.63.63 0 0 1 0 1.18l-4.99 1.8a.63.63 0 0 0-.37.38z"
               fill="#FFC017"></path></svg></span>

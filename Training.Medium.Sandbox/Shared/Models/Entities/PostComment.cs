@@ -9,7 +9,6 @@ namespace Shared.Models.Entities
 {
     public class PostComment : SoftDeletedEntity
     {
-      
         public Guid Id { get; set; }
 
         public User UserId { get; set; }
