@@ -8,6 +8,9 @@ public interface IDataContext : IAsyncDisposable
     IFileSet<User, Guid> Users { get; }
     IFileSet<BlogPost, Guid> Posts { get; }
     IFileSet<PostView, Guid> PostViews { get; }
+    IFileSet<PostFeedback, Guid> PostFeedbacks { get; }
+    IFileSet<PostComment, Guid> PostComments { get; }
+
 
     ValueTask SaveChangesAsync();
 }

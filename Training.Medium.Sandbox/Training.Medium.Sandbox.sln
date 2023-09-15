@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FeedSection", "FeedSection\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DiscoverySection", "DiscoverySection\DiscoverySection.csproj", "{DFDD654E-04ED-4B22-AA1A-5EC8A76A15BC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContentQualitySection", "ContentQualitySection\ContentQualitySection.csproj", "{6D402BBB-63EB-4B4A-AFC5-AC16CD0B8F87}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContentQualitySection", "ContentQualitySection\ContentQualitySection.csproj", "{6D402BBB-63EB-4B4A-AFC5-AC16CD0B8F87}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotificationsSection", "NotificationsSection\NotificationsSection.csproj", "{AF469659-E353-4E0C-AC08-FF1024C97F84}"
 EndProject

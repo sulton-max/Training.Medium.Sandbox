@@ -65,5 +65,12 @@ namespace ContentQualitySection.Services.Interfaces
         /// <param name="word"></param>
         /// <returns></returns>
         bool IsComplexWord(string word);
+
+        /// <summary>
+        /// Barcha so'zlarni lowercase ligiga tekshiradi
+        /// </summary>
+        /// <param name="content"></param>
+        /// <returns>lower words count</returns>
+        int CheckLowerWords(string content);
     }
 }

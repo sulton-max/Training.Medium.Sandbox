@@ -17,7 +17,10 @@ public static class SeedData
 
         if (!fileContext.PostViews.Any())
             await fileContext.AddAsync<PostView>(1000);
-
+        //
+        // if (!fileContext.Sharings.Any())
+        //     await fileContext.Sharings.AddRangeAsync(GetBlogPostShareFaker(fileContext).Generate(50));
+       
         await fileContext.SaveChangesAsync();
     }
 
@@ -59,6 +62,16 @@ public static class SeedData
 
         await context.PostViews.AddRangeAsync(uniquePostViews.Take(count));
         await context.SaveChangesAsync();
+    }
+
+    private static Faker<BlogPostShare> GetBlogPostShareFaker(AppFileContext context) 
+    {
+        return new Faker<BlogPostShare>()
+            .RuleFor(sharing => sharing.UserId, source => source.PickRandom(context.Users.Select(user => user.Id)))
+            .RuleFor(sharing => sharing.BlogPostId, source => source.PickRandom(context.Posts
+                                                                                                        .Select(post => post.Id)))
+            .RuleFor(sharing => sharing.ShareTo, source => source
+                                    .PickRandom(SocialMedia.WhatsApp, SocialMedia.Massenger, SocialMedia.LinkedIn, SocialMedia.Telegram));
     }
 }
 

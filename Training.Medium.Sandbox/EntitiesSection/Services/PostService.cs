@@ -66,7 +66,7 @@ namespace EntitiesSection.Services
 
         public async ValueTask<BlogPost> UpdateAsync(BlogPost blogPost, bool saveChanges = true)
         {
-            var foundPost = _appDataContext.Posts.FirstOrDefault(serached =>  serached.Id == blogPost.Id);
+            var foundPost = _appDataContext.Posts.FirstOrDefault(searched =>  searched.Id == blogPost.Id);
             if (blogPost is null)
                 throw new InvalidOperationException("Post not found!");
 
