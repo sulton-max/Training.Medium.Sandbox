@@ -12,6 +12,7 @@ namespace DiscoverySection.Models
         public DiscoveryTopics()
         {
             Topics = new List<string>();
+
         }
     }
 }

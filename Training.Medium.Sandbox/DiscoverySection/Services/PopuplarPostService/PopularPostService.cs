@@ -1,4 +1,4 @@
-﻿using Shared.DataAccess.Contexts;
+using Shared.DataAccess.Contexts;
 using Shared.Models.Entities;
 using System;
 using System.Collections.Generic;
@@ -11,7 +11,6 @@ namespace DiscoverySection.Services.PopuplarPostService
 {
     public class PopularPostService : IPopularPostService
     {
-        private readonly AppFileContext _appDataContext;
         private readonly IDataContext dataContext;
 
         public PopularPostService(IDataContext dataContext)

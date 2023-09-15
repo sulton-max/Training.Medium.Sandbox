@@ -1,4 +1,4 @@
-﻿using DiscoverySection.Models;
+using DiscoverySection.Models;
 using DiscoverySection.Services.PopuplarPostService;
 using DiscoverySection.Services.Trending_PostService;
 using System;
@@ -19,7 +19,8 @@ namespace DiscoverySection.Services.DiscoveryService
         }
         public DiscoveryTopics GetMostCommonTopics()
         {
-            var sharedPosts = _popularPostInstance.GetPopularPosts();
+            var b = _popularPostInstance.GetPopularPosts();
+            //Concat(b);
 
             //Concat(b);
 
