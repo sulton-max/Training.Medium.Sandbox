@@ -1,4 +1,5 @@
-﻿using EntitiesSection.Services.Interfaces;
+﻿using DiscoverySection.Services.PopuplarPostService;
+using EntitiesSection.Services.Interfaces;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Shared.DataAccess.Contexts;
@@ -185,9 +186,10 @@ public class PostsController : ControllerBase
     }
 
     [HttpGet("popular")]
-    public IActionResult GetPopularPosts()
+    public async ValueTask<IActionResult> GetPopularPosts([FromServices] IPopularPostService popularPostService)
     {
-        throw new NotImplementedException();
+        var result = await popularPostService.GetPopularPostsAsync();
+        return result.Any() ? Ok(result) : NotFound();
     }
 
     [HttpGet("trending")]

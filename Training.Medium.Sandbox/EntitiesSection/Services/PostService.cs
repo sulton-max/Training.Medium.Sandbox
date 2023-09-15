@@ -7,10 +7,10 @@ namespace EntitiesSection.Services
 {
     public class PostService : IPostService
     {
-        private readonly AppFileContext _appDataContext;
+        private readonly IDataContext _appDataContext;
         //private readonly IValidationService _validationService;
 
-        public PostService(AppFileContext appDataContext)    //IValidationService validationService
+        public PostService(IDataContext appDataContext)    //IValidationService validationService
         {
             _appDataContext = appDataContext;
             //_validationService = validationService;
@@ -66,7 +66,7 @@ namespace EntitiesSection.Services
 
         public async ValueTask<BlogPost> UpdateAsync(BlogPost blogPost, bool saveChanges = true)
         {
-            var foundPost = _appDataContext.Posts.FirstOrDefault(serached =>  serached.Id == blogPost.Id);
+            var foundPost = _appDataContext.Posts.FirstOrDefault(searched =>  searched.Id == blogPost.Id);
             if (blogPost is null)
                 throw new InvalidOperationException("Post not found!");
 

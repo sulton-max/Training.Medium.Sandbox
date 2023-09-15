@@ -15,6 +15,9 @@ public static class SeedData
         if (!fileContext.Posts.Any())
             await fileContext.AddAsync<BlogPost>(1000);
 
+        if (!fileContext.PostDetails.Any())
+            await fileContext.AddAsync<PostDetails>(1000);
+
         if (!fileContext.PostViews.Any())
             await fileContext.AddAsync<PostView>(1000);
         //
@@ -31,6 +34,7 @@ public static class SeedData
             { } t when t == typeof(User) => context.AddUsersAsync(count),
             { } t when t == typeof(BlogPost) => context.AddPostsAsync(count),
             { } t when t == typeof(PostView) => context.AddPostViewsAsync(count),
+            { } t when t == typeof(PostDetails) => context.AddPostDetailsAsync(count),
             _ => new ValueTask(Task.CompletedTask)
         };
 
@@ -55,6 +59,15 @@ public static class SeedData
         await context.SaveChangesAsync();
     }
 
+    private static async ValueTask AddPostDetailsAsync(this IDataContext context, int count)
+    {
+        var faker = EntityFakers.GetBlogPostFaker(context);
+        var uniquePosts = faker.Generate(context.Posts.Count());
+
+        await context.Posts.AddRangeAsync(uniquePosts.Take(count));
+        await context.SaveChangesAsync();
+    }
+
     private static async ValueTask AddPostViewsAsync(this IDataContext context, int count)
     {
         var faker = EntityFakers.GetPostViewFaker(context);
@@ -64,7 +77,7 @@ public static class SeedData
         await context.SaveChangesAsync();
     }
 
-    private static Faker<BlogPostShare> GetBlogPostShareFaker(AppFileContext context) 
+    private static Faker<BlogPostShare> GetBlogPostShareFaker(IDataContext context) 
     {
         return new Faker<BlogPostShare>()
             .RuleFor(sharing => sharing.UserId, source => source.PickRandom(context.Users.Select(user => user.Id)))
