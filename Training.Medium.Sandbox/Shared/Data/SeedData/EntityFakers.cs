@@ -38,9 +38,17 @@ internal static class EntityFakers
             "Fashion and Style",
             "Technology and Gadgets",
             "Health and Wellness",
-            "Travel and Adventure"
-            
-            
+            "Travel and Adventure",
+            "Self-Care and Mental Health",
+            "History and Culture",
+            "Hobbies and Crafts",
+            "Sports and Fitness",
+            "Science and Technology",
+            "Travel and Food",
+            "Environmental Sustainability",
+            "Home Improvement and DIY",
+            "Entertainment and Pop Culture",
+            "Education and Learning"
         };
 
         return new Faker<PostDetails>()

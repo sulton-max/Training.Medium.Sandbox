@@ -61,10 +61,10 @@ public static class SeedData
 
     private static async ValueTask AddPostDetailsAsync(this IDataContext context, int count)
     {
-        var faker = EntityFakers.GetBlogPostFaker(context);
-        var uniquePosts = faker.Generate(context.Posts.Count());
+        var faker = EntityFakers.GetPostDetailsFaker(context);
+        var uniquePostDetails = faker.Generate(context.Posts.Count());
 
-        await context.Posts.AddRangeAsync(uniquePosts.Take(count));
+        await context.PostDetails.AddRangeAsync(uniquePostDetails.Take(count));
         await context.SaveChangesAsync();
     }
 

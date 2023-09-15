@@ -21,6 +21,7 @@ namespace DiscoverySection.Services.PopuplarPostService
             IPostCommentService postCommentService,
             IPostDetailsService postDetailsService,
             IPostViewService postViewService
+            
         )
         {
             _dataContext = dataContext;
@@ -38,6 +39,8 @@ namespace DiscoverySection.Services.PopuplarPostService
             var postCommentsQuery = _commentService.Get(post => true);
             var postShareQuery = _postShareService.Get(post => true);
             var postDetailsQuery = _postDetailsService.Get(post => true);
+            
+            //postViewsQuery = postViewsQuery.orderBy(postView => postView.)
             
             var posts = _postService.Get(post => true).ToList();
             return new ValueTask<List<BlogPost>>(posts);
