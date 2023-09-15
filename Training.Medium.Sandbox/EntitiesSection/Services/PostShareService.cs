@@ -54,7 +54,7 @@ namespace EntitiesSection.Services
 
         private bool isValidSendingPost(BlogPostShare sharing)
         {
-            var validationSharingPost = _appDataContext.PostShares.FirstOrDefault(x => x.UserId == sharing.UserId && x.BlogPostId == sharing.BlogPostId);
+            var validationSharingPost = _appDataContext.PostShares.FirstOrDefault(x => x.UserId == sharing.UserId && x.PostId == sharing.PostId);
             if (validationSharingPost != null)
             {
                 return true;

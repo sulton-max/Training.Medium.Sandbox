@@ -2,12 +2,14 @@
 using EntitiesSection.Services.Interfaces;
 using Shared.DataAccess.Contexts;
 using Shared.Models.Entities;
+using System.Linq.Expressions;
+
 namespace EntitiesSection.Services;
 public class PostFeedbackService : IPostFeedbackService
 {
-    private readonly AppFileContext _appDateContext;
+    private readonly IDataContext _appDateContext;
 
-    public PostFeedbackService(AppFileContext appFileContext)
+    public PostFeedbackService(IDataContext appFileContext)
         => _appDateContext = appFileContext;
     public async Task ClapAsync(Guid postId, Guid userId)
     {
@@ -24,5 +26,10 @@ public class PostFeedbackService : IPostFeedbackService
         IsExistInData.UserClaps += 1;
         await _appDateContext.PostFeedbacks.SaveChangesAsync();
         return;
+    }
+
+    public IQueryable<PostFeedback> Get(Expression<Func<PostFeedback, bool>> predicate)
+    {
+        return _appDateContext.PostFeedbacks.Where(predicate.Compile()).AsQueryable();
     }
 }

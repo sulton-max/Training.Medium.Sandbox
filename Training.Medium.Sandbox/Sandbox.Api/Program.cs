@@ -1,4 +1,5 @@
 using DiscoverySection.Services.PopuplarPostService;
+using DiscoverySection.Services.Trending_PostService;
 using EntitiesSection;
 using EntitiesSection.Services;
 using EntitiesSection.Services.Interfaces;
@@ -30,11 +31,13 @@ builder.Services.AddScoped<IUserService, UserService>();
 // posts
 builder.Services.AddScoped<IPostService, PostService>();
 builder.Services.AddScoped<IPostDetailsService, PostDetailsService>();
+builder.Services.AddScoped<IPostFeedbackService, PostFeedbackService>();
 builder.Services.AddScoped<IPostViewService, PostViewService>();
 builder.Services.AddScoped<IPostShareService, PostShareService>();
 builder.Services.AddScoped<IPostViewService, PostViewService>();
 builder.Services.AddScoped<IPostCommentService, PostCommentService>();
 builder.Services.AddScoped<IPopularPostService, PopularPostService>();
+builder.Services.AddScoped<ITrendingPostService, TrendingPostService>();
 
 // post analysis
 

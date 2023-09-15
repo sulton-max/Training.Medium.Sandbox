@@ -14,13 +14,13 @@ namespace Shared.Models.Entities
 
         public User UserId { get; set; }
 
-        public BlogPost PostId { get; set; }
+        public Guid PostId { get; set; }
 
         public int ClapsCount { get; set; }
 
         public PostComment() { }
 
-        public PostComment(Guid id, User userId, BlogPost postId, int clapsCount)
+        public PostComment(Guid id, User userId, Guid postId, int clapsCount)
         {
             Id = id;
             UserId = userId;

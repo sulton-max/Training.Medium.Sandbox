@@ -4,6 +4,7 @@ using System.Collections.Immutable;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using EntitiesSection.Services.Interfaces;
 using Shared.DataAccess.Contexts;
 using Shared.Models.Entities;
 
@@ -11,24 +12,51 @@ namespace DiscoverySection.Services.Trending_PostService
 {
     public class TrendingPostService : ITrendingPostService
     {
-        private readonly AppFileContext _appDataContext;
-        public TrendingPostService(AppFileContext appDataContext)
+        private readonly IDataContext _appDataContext;
+        private readonly IPostService _postService;
+        private readonly IPostShareService _postShareService;
+        private readonly IPostCommentService _commentService;
+        private readonly IPostDetailsService _postDetailsService;
+        private readonly IPostFeedbackService _postFeedbackService;
+        private readonly IPostViewService _viewService;
+        public TrendingPostService(
+            IDataContext dataContext,
+            IPostService postService,
+            IPostShareService postShareService,
+            IPostCommentService postCommentService,
+            IPostDetailsService postDetailsService,
+            IPostFeedbackService postFeedbackService,
+            IPostViewService postViewService
+        )
         {
-            _appDataContext = appDataContext;
+            _appDataContext = dataContext;
+            _postService = postService;
+            _postShareService = postShareService;
+            _commentService = postCommentService;
+            _postDetailsService = postDetailsService;
+            _postFeedbackService = postFeedbackService;
+            _viewService = postViewService;
         }
-        public List<BlogPost> GetTrendingPosts()
+        public async ValueTask<List<BlogPost>> GetTrendingPostsAsync()
         {
-            _ = _appDataContext.FetchAsync();
-            var TrendingPosts = _appDataContext.Posts.Select(post => post);
-            TrendingPosts = (IEnumerable<BlogPost>)(from Post in _appDataContext.Posts
-                                join View in _appDataContext.PostViews on Post.Id equals View.Id
-                                    join Clap in _appDataContext.PostFeedbacks on Post.Id equals Clap.PostId
-                                        join Savings in _appDataContext.PostShares on Post.Id equals Savings.BlogPostId
-                                select new { Posts = Post, Views = View, Feedbacks = Clap, PostShares = Savings }).ToList();
-            
-            //TrendingPosts = _appDataContext.PostViews.GroupJoin(Posts, Views => Views,
-            //    Posts => Posts.)
-            return new List<BlogPost>();
+            var postsQuery = _postService.Get(post => true);
+            var postViewsQuery = _viewService.Get(post => true);
+            var postCommentsQuery = _commentService.Get(post => true);
+            var postShareQuery = _postShareService.Get(post => true);
+            var postDetailsQuery = _postDetailsService.Get(post => true);
+            var postFeedbackService = _postFeedbackService.Get(post => true);
+
+            var trendingPostsQuery =
+                from post in postsQuery
+                join postView in postViewsQuery on post.Id equals postView.PostId
+                join postShare in postShareQuery on post.Id equals postShare.PostId
+                join postComment in postCommentsQuery on post.Id equals postComment.PostId
+                join postFeedback in postCommentsQuery on post.Id equals postFeedback.PostId
+                select new { Posts = post, Views = postView, Feedbacks = postFeedback, PostShares = postShare };
+
+            //var trendingPosts = trendingPostsQuery.ToList();
+
+            return trendingPostsQuery.Select(result => result.Posts).ToList();
         }
     }
 }

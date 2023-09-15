@@ -1,4 +1,5 @@
 ﻿using DiscoverySection.Services.PopuplarPostService;
+using DiscoverySection.Services.Trending_PostService;
 using EntitiesSection.Services.Interfaces;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
@@ -193,9 +194,10 @@ public class PostsController : ControllerBase
     }
 
     [HttpGet("trending")]
-    public IActionResult GetTrendingPosts()
+    public async ValueTask<IActionResult> GetTrendingPosts([FromServices]ITrendingPostService trendingPostService)
     {
-        throw new NotImplementedException();
+        var result = await trendingPostService.GetTrendingPostsAsync();
+        return result.Any() ? Ok(result) : NotFound();
     }
 
     [HttpGet("viral")]

@@ -81,7 +81,7 @@ public static class SeedData
     {
         return new Faker<BlogPostShare>()
             .RuleFor(sharing => sharing.UserId, source => source.PickRandom(context.Users.Select(user => user.Id)))
-            .RuleFor(sharing => sharing.BlogPostId, source => source.PickRandom(context.Posts
+            .RuleFor(sharing => sharing.PostId, source => source.PickRandom(context.Posts
                                                                                                         .Select(post => post.Id)))
             .RuleFor(sharing => sharing.ShareTo, source => source
                                     .PickRandom(SocialMedia.WhatsApp, SocialMedia.Massenger, SocialMedia.LinkedIn, SocialMedia.Telegram));
