@@ -5,28 +5,24 @@ namespace Shared.Models.Entities;
 public class UserCredentials : SoftDeletedEntity
 {
     public string Password { get; set; }
-    public Guid UserId { get; set; }
+    public Guid UserId { get; init; }
 
     public UserCredentials(string password, Guid userId)
     {
         Id = Guid.NewGuid();
         Password = password;
         UserId = userId;
-        CreatedDate = DateTime.Now;
-        DeletedDate = default(DateTime);
+        CreatedDate = DateTime.UtcNow;
         IsDeleted = false;
     }
 
-    public override int GetHashCode()
+    public override string ToString()
     {
-        return HashCode.Combine(Password, UserId, CreatedDate, DeletedDate);
-    }
-
-    public override bool Equals(object? obj)
-    {
-        if (obj != null && obj is UserCredentials)
-            return GetHashCode() == obj.GetHashCode();
-
-        return false;
+        return $"Password: {Password} \n" +
+            $"UserId: {UserId} \n" +
+            $"CreatedDate: {CreatedDate} \n" +
+            $"ModifiedDate: {ModifiedDate} \n" +
+            $"DeletedDate: {DeletedDate} \n" +
+            $"IsDeleted: {IsDeleted}\n\n";
     }
 }
