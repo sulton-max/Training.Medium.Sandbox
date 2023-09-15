@@ -1,11 +1,26 @@
-﻿namespace NotificationsSection.Models;
+﻿using Shared.Models.Common;
 
-public class EmailMessage
+namespace NotificationsSection.Models;
+
+
+public class EmailMessage : SoftDeletedEntity
 {
     public string Subject { get; set; }
     public string Body { get; set; }
-    public string FromEmailAddress { get; set; }
-    public string ToEmailAddress { get; set; }
-    public bool IsEmailConfirmed { get; set; }
-    public DateTime SendedTime { get; set; }
+    public string SenderAddress { get; set; }
+    public string ReceiverAddress { get; set; }
+    public bool IsSent { get; set; }
+    public DateTime? SentDate { get; set; }
+
+
+    public EmailMessage(string subject, string body, string senderAddress, string receiverAddress)
+    {
+        Id = Guid.NewGuid();
+        Subject = subject;
+        Body = body;
+        SenderAddress = senderAddress;
+        ReceiverAddress = receiverAddress;
+        CreatedDate = DateTime.UtcNow;
+        IsSent = false;
+    }
 }
