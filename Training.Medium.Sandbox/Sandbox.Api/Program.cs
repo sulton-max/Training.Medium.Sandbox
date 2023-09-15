@@ -1,3 +1,5 @@
+using DiscoverySection.Services.PopuplarPostService;
+using EntitiesSection;
 using EntitiesSection.Services;
 using EntitiesSection.Services.Interfaces;
 using MembershipSection.Services;
@@ -14,16 +16,25 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSingleton<IValidationService, ValidationService>();
 
 // data access
-builder.Services.AddScoped<IDataContext, AppFileContext>(_ => new AppFileContext(builder.Environment.ContentRootPath));
+builder.Services.AddScoped<IDataContext, AppFileContext>(_ =>
+{
+    var context = new AppFileContext(Path.Combine(builder.Environment.ContentRootPath, "Data", "DataStorage"));
+    context.FetchAsync().AsTask().Wait();
 
-// TODO : remove this
-builder.Services.AddScoped<AppFileContext>(_ => new AppFileContext(builder.Environment.ContentRootPath));
+    return context;
+});
 
 // account
 builder.Services.AddScoped<IUserService, UserService>();
 
 // posts
 builder.Services.AddScoped<IPostService, PostService>();
+builder.Services.AddScoped<IPostDetailsService, PostDetailsService>();
+builder.Services.AddScoped<IPostViewService, PostViewService>();
+builder.Services.AddScoped<IPostShareService, PostShareService>();
+builder.Services.AddScoped<IPostViewService, PostViewService>();
+builder.Services.AddScoped<IPostCommentService, PostCommentService>();
+builder.Services.AddScoped<IPopularPostService, PopularPostService>();
 
 // post analysis
 
@@ -43,6 +54,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
 builder.Services.AddRouting(options => options.LowercaseUrls = true);
 
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -53,5 +65,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseSwagger();
 app.UseSwaggerUI();
+app.MapControllers();
 
 await app.RunAsync();

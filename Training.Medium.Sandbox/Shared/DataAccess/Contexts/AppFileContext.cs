@@ -12,9 +12,10 @@ public class AppFileContext : IDataContext
     public IFileSet<PostComment, Guid> PostComments { get; }
     public IFileSet<User, Guid> Users { get; }
     public IFileSet<BlogPost, Guid> Posts { get; }
+    public IFileSet<PostDetails, Guid> PostDetails { get; }
     public IFileSet<PostView, Guid> PostViews { get; }
     public IFileSet<UserCredentials, Guid> UserCredentials { get; }
-    public readonly IFileSet<EmailTemplate, Guid> EmailTemplates;
+    public IFileSet<EmailTemplate, Guid> EmailTemplates { get; }
     public IFileSet<BlogPostShare, Guid> PostShares { get; }
     public IFileSet<PostFeedback, Guid> PostFeedbacks { get; }
 
@@ -26,6 +27,7 @@ public class AppFileContext : IDataContext
         PostComments = new FileSet<PostComment, Guid>(folderPath, serializer, provider);
         Users = new FileSet<User, Guid>(folderPath, serializer, provider);
         Posts = new FileSet<BlogPost, Guid>(folderPath, serializer, provider);
+        PostDetails = new FileSet<PostDetails, Guid>(folderPath, serializer, provider);
         PostViews = new FileSet<PostView, Guid>(folderPath, serializer, provider);
         UserCredentials = new FileSet<UserCredentials, Guid>(folderPath, serializer, provider);
         EmailTemplates = new FileSet<EmailTemplate, Guid>(folderPath, serializer, provider);
@@ -37,6 +39,7 @@ public class AppFileContext : IDataContext
         await PostComments.FetchAsync();
         await Users.FetchAsync();
         await Posts.FetchAsync();
+        await PostDetails.FetchAsync();
         await PostViews.FetchAsync();
         await UserCredentials.FetchAsync();
         await PostShares.FetchAsync();
@@ -48,6 +51,7 @@ public class AppFileContext : IDataContext
         await PostComments.SaveChangesAsync();
         await Users.SaveChangesAsync();
         await Posts.SaveChangesAsync();
+        await PostDetails.SaveChangesAsync();
         await PostViews.SaveChangesAsync();
         await UserCredentials.SaveChangesAsync();
         await PostShares.SaveChangesAsync();

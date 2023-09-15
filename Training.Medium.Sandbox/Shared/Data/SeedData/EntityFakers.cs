@@ -19,14 +19,48 @@ internal static class EntityFakers
         return new Faker<BlogPost>().RuleFor(keySelector => keySelector.Id, Guid.NewGuid)
             .RuleFor(keySelector => keySelector.Title, source => source.Lorem.Text())
             .RuleFor(keySelector => keySelector.Content, source => source.Lorem.Paragraph(5))
-            .RuleFor(keySelector => keySelector.AuthorId, source => source.PickRandom(context.Users.Select(user => user.Id)));
+            .RuleFor(keySelector => keySelector.AuthorId,
+                source => source.PickRandom(context.Users.Select(user => user.Id)));
+    }
+
+    internal static Faker<PostDetails> GetPostDetailsFaker(IDataContext context)
+    {
+        // TODO : this fails if requuested post details number is less than posts count
+        var postDetails = context.Posts.Select(post => post.Id).ToList();
+        var categories = new List<string>
+        {
+            "Business and Entrepreneurship",
+            "Relationships and Dating",
+            "Lifestyle and Personal Development",
+            "Finance and Money",
+            "Parenting and Family",
+            "Food and Cooking",
+            "Fashion and Style",
+            "Technology and Gadgets",
+            "Health and Wellness",
+            "Travel and Adventure"
+            
+            
+        };
+
+        return new Faker<PostDetails>()
+            .RuleFor(keySelector => keySelector.Id, Guid.NewGuid)
+            .RuleFor(keySelector => keySelector.PostId, () =>
+            {
+                var postId = postDetails.First();
+                postDetails.Remove(postId);
+                return postId;
+            })
+            .RuleFor(keySelector => keySelector.Category, source => source.PickRandom(categories));
     }
 
     internal static Faker<PostView> GetPostViewFaker(IDataContext context)
     {
         return new Faker<PostView>()
             .RuleFor(keySelector => keySelector.Id, Guid.NewGuid)
-            .RuleFor(keySelector => keySelector.PostId, source => source.PickRandom(context.Posts.Select(post => post.Id)))
-            .RuleFor(keySelector => keySelector.UserId, source => source.PickRandom(context.Users.Select(user => user.Id)));
+            .RuleFor(keySelector => keySelector.PostId,
+                source => source.PickRandom(context.Posts.Select(post => post.Id)))
+            .RuleFor(keySelector => keySelector.UserId,
+                source => source.PickRandom(context.Users.Select(user => user.Id)));
     }
 }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace EntitiesSection.Services.Interfaces
 {
-    public interface IBlogPostShare
+    public interface IPostShareService
     {
         IQueryable<BlogPostShare> Get(Expression<Func<BlogPostShare, bool>> predicate);
 

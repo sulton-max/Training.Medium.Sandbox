@@ -1,31 +1,43 @@
 using Shared.DataAccess.Contexts;
 using Shared.Models.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Shared.Models.Entities;
+using EntitiesSection.Services.Interfaces;
 
 namespace DiscoverySection.Services.PopuplarPostService
 {
     public class PopularPostService : IPopularPostService
     {
-        private readonly IDataContext dataContext;
+        private readonly IDataContext _dataContext;
+        private readonly IPostService _postService;
+        private readonly IPostShareService _postShareService;
+        private readonly IPostCommentService _commentService;
+        private readonly IPostViewService _viewService;
 
-        public PopularPostService(IDataContext dataContext)
+        public PopularPostService
+        (
+            IDataContext dataContext,
+            IPostService postService,
+            IPostShareService postShareService,
+            IPostCommentService postCommentService,
+            IPostViewService postViewService
+        )
         {
-            this.dataContext = dataContext;
+            _dataContext = dataContext;
+            _postService = postService;
+            _postShareService = postShareService;
+            _commentService = postCommentService;
+            _viewService = postViewService;
+
         }
 
-        public List<BlogPost> GetPopularPosts()
+        public ValueTask<List<BlogPost>> GetPopularPostsAsync()
         {
-            var LateMonthPosts = dataContext.Posts.Where(post => post.IsDeleted != true && post.CreatedDate <= post.CreatedDate.AddMonths(1)).Take(10).ToList();
+            var postsQuery = _postService.Get(post => true);
+            var postViewsQuery = _viewService.Get(post => true);
+            var postCommentsQuery = _commentService.Get(post => true);
+            var postShareQuery = _postShareService.Get(post => true);
 
-
-            //dataContext.Posts.Where(post => post.IsDeleted != true && post.CreatedDate <= post.CreatedDate.AddMonths(1)).Take(10);
-
-            return new List<BlogPost>();
+            var posts = _postService.Get(post => true).ToList();
+            return new ValueTask<List<BlogPost>>(posts);
         }
     }
 }

@@ -25,7 +25,7 @@ namespace DiscoverySection.Services.DiscoveryService
         // }
         public List<DiscoveryTopics> GetMostCommonTopics()
         {
-            var b = _popularPostInstance.GetPopularPosts();
+            var b = _popularPostInstance.GetPopularPostsAsync();
             //Concat(b);
 
             //Concat(b);

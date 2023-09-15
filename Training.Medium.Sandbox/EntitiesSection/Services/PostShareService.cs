@@ -11,12 +11,12 @@ using System.Threading.Tasks;
 
 namespace EntitiesSection.Services
 {
-    public class BlogPostShareService : IBlogPostShare
+    public class PostShareService : IPostShareService
     {
-        private readonly AppFileContext _appDataContext;
+        private readonly IDataContext _appDataContext;
         private readonly IValidationService _validationService;
 
-        public BlogPostShareService(AppFileContext appFileContext, IValidationService validationService)
+        public PostShareService(IDataContext appFileContext, IValidationService validationService)
         {
             _appDataContext = appFileContext;
             _validationService = validationService;
