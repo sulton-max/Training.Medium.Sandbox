@@ -1,4 +1,4 @@
-﻿using DiscoverySection.Services.Models;
+﻿using DiscoverySection.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +9,6 @@ namespace DiscoverySection.Services.DiscoveryService
 {
     public interface IDiscoveryService
     {
-        public List<DiscoveryTopics> GetMostCommonTopics();
+        public DiscoveryTopics GetMostCommonTopics();
     }
 }

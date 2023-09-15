@@ -1,8 +1,8 @@
-﻿using EntitiesSection.Services.Interfaces;
+using EntitiesSection.Services.Interfaces;
 using Shared.DataAccess.Contexts;
 using Shared.Models.Entities;
+using System.ComponentModel.DataAnnotations;
 using System.Linq.Expressions;
-using System.Text.RegularExpressions;
 
 namespace EntitiesSection.Services;
 
@@ -19,69 +19,103 @@ public class UserCredentialsService : IUserCredentialsService
 
     public async ValueTask<UserCredentials> CreateAsync(UserCredentials userCredentials, bool saveChanges = true)
     {
+        if (!ValidateOnCreate(userCredentials))
+            throw new ValidationException("Invalid user credentials!");
+
+        userCredentials.Password = PasswordHasher.Hash(userCredentials.Password);
         await _appDataContext.UserCredentials.AddAsync(userCredentials);
 
         if (saveChanges)
-            await _appDataContext.SaveChangesAsync();
+            await _appDataContext.UserCredentials.SaveChangesAsync();
 
         return userCredentials;
     }
 
-    public ValueTask<UserCredentials> DeleteAsync(Guid id, bool saveChanges = true)
+    public async ValueTask<UserCredentials> DeleteAsync(Guid id, bool saveChanges = true)
     {
-        throw new NotImplementedException();
+        var oldCredentials = await GetById(id);
+        if (oldCredentials.IsDeleted)
+            throw new InvalidOperationException("User credentials is already Deleted!");
+
+        oldCredentials.IsDeleted = true;
+        oldCredentials.DeletedDate = DateTime.UtcNow;
+
+        if (saveChanges)
+            await _appDataContext.UserCredentials.SaveChangesAsync();
+        return oldCredentials;
     }
 
-    public ValueTask<UserCredentials> DeleteAsync(UserCredentials userCredentials, bool saveChanges = true)
-    {
-        throw new NotImplementedException();
-    }
+    public async ValueTask<UserCredentials> DeleteAsync(UserCredentials userCredentials, bool saveChanges = true)
+        => await DeleteAsync(userCredentials.Id, saveChanges);
+    
 
     public IQueryable<UserCredentials> Get(Expression<Func<UserCredentials, bool>> predicate)
-    {
-        return _appDataContext.UserCredentials.Where(predicate.Compile()).AsQueryable();
-    }
+        => _appDataContext.UserCredentials.Where(predicate.Compile()).AsQueryable();
+    
 
-    public ValueTask<ICollection<UserCredentials>> Get(IEnumerable<Guid> id)
+    public ValueTask<ICollection<UserCredentials>> Get(IEnumerable<Guid> ids)
     {
-        throw new NotImplementedException();
+        var userCredentials = _appDataContext.UserCredentials
+            .Where(credentials => ids.Contains(credentials.Id));
+
+        return new ValueTask<ICollection<UserCredentials>>(userCredentials.ToList());
     }
 
     public async ValueTask<UserCredentials> GetById(Guid id)
     {
-        return await _appDataContext.UserCredentials.FindAsync(id);
+        var userCredentials = await _appDataContext.UserCredentials.FindAsync(id);
+        //var userCredentials = _appDataContext.UserCredentials.FirstOrDefault(credentials => credentials.Id == id);
+        if (userCredentials == null)
+            throw new ArgumentOutOfRangeException(nameof(id), "User Credentails with the given id not found!");
 
+        return userCredentials;
     }
 
-    public ValueTask<UserCredentials> UpdateAsync(UserCredentials userCredentials, bool saveChanges = true)
+    public async ValueTask<UserCredentials> UpdateAsync(string oldPassword, UserCredentials userCredentials, bool saveChanges = true)
     {
-        throw new NotImplementedException();
+        if (!ValidateOnUpdate(userCredentials))
+            throw new ValidationException("Invalid user credentials!");
+
+        var oldCredentials = await GetById(userCredentials.Id);
+        if (!PasswordHasher.Verify(oldPassword, oldCredentials.Password))
+            throw new ArgumentOutOfRangeException(nameof(oldPassword), "Incorrect old Password!");
+
+        oldCredentials.Password = PasswordHasher.Hash(userCredentials.Password);
+        oldCredentials.ModifiedDate = DateTime.UtcNow;
+
+        if (saveChanges)
+            await _appDataContext.UserCredentials.SaveChangesAsync();
+
+        return oldCredentials;
     }
 
-    private bool IsValidCreatedUser(UserCredentials userCredentials)
+    private bool UserCredentialExists(Guid id)
+        => _appDataContext.UserCredentials.Any(credentials => credentials.Id == id);
+
+    private bool ValidateOnCreate(UserCredentials userCredentials)
     {
-        var existingUserCredentials =
-            _appDataContext.UserCredentials.FirstOrDefault(x => x.UserId == userCredentials.UserId);
-        if (existingUserCredentials == null)
-        {
-            return false; 
-        }
+        if (UserCredentialExists(userCredentials.Id))
+            throw new InvalidOperationException("User Credentials already exists!");
+
+        if (_appDataContext.UserCredentials.Any(credentials => credentials.UserId == userCredentials.UserId))
+            throw new InvalidOperationException("The given user already has credentials!");
+
+        ValidatePassword(userCredentials.Password);
         return true;
     }
-    private bool IsValidUpdatedUser(UserCredentials userCredentials, string newpassword)
-    {
-        var existingUserCRedintials =
-            _appDataContext.UserCredentials.FirstOrDefault(x => x.UserId == userCredentials.UserId);
-        if (existingUserCRedintials == null)
-        {
-            return false;
-        }
 
-        const string passwordPattern = @"^(.{0,7}|[^0-9]*|[^A-Z])$";
-        if (!Regex.IsMatch(newpassword, passwordPattern))
-        {
-            return false;
-        }
+    private bool ValidateOnUpdate(UserCredentials userCredentials)
+    {
+        if (!UserCredentialExists(userCredentials.Id))
+            throw new InvalidOperationException("User Credentials not found!");
+
+        ValidatePassword(userCredentials.Password);
         return true;
+    }
+
+    private void ValidatePassword(string password)
+    {
+        if (password.Length < 8)
+            throw new ArgumentOutOfRangeException(nameof(password), "Password must contain at least 8 characters!");
     }
 }
