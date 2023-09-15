@@ -9,6 +9,7 @@ namespace Shared.DataAccess.Contexts;
 
 public class AppFileContext : IDataContext
 {
+    public IFileSet<PostComment, Guid> PostComments { get; }
     public IFileSet<User, Guid> Users { get; }
     public IFileSet<BlogPost, Guid> Posts { get; }
     public IFileSet<PostView, Guid> PostViews { get; }
@@ -22,6 +23,7 @@ public class AppFileContext : IDataContext
         var serializer = new JsonSerializer();
         var provider = new HumanizerPluralizationProvider();
 
+        PostComments = new FileSet<PostComment, Guid>(folderPath, serializer, provider);
         Users = new FileSet<User, Guid>(folderPath, serializer, provider);
         Posts = new FileSet<BlogPost, Guid>(folderPath, serializer, provider);
         PostViews = new FileSet<PostView, Guid>(folderPath, serializer, provider);
@@ -32,6 +34,7 @@ public class AppFileContext : IDataContext
 
     public virtual async ValueTask FetchAsync()
     {
+        await PostComments.FetchAsync();
         await Users.FetchAsync();
         await Posts.FetchAsync();
         await PostViews.FetchAsync();
@@ -42,6 +45,7 @@ public class AppFileContext : IDataContext
 
     public virtual async ValueTask SaveChangesAsync()
     {
+        await PostComments.SaveChangesAsync();
         await Users.SaveChangesAsync();
         await Posts.SaveChangesAsync();
         await PostViews.SaveChangesAsync();
