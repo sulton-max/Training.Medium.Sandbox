@@ -39,10 +39,27 @@ namespace DiscoverySection.Services.PopuplarPostService
             var postCommentsQuery = _commentService.Get(post => true);
             var postShareQuery = _postShareService.Get(post => true);
             var postDetailsQuery = _postDetailsService.Get(post => true);
-            
-            //postViewsQuery = postViewsQuery.orderBy(postView => postView.)
-            
-            var posts = _postService.Get(post => true).ToList();
+
+
+            /*var popularPostQuery =
+                from post in postsQuery
+                join postViews in postViewsQuery on post.Id equals postViews.PostId into viewGroup
+                join postComments in postCommentsQuery on post.Id equals postComments.PostId into commentGroup
+                join postShares in postShareQuery on post.Id equals postShares.PostId into shareGroupshareGroup
+                let totalViews = viewGroup.Sum(v => v.Count)
+                let totalComments = commentGroup.Count()
+                let totalShares = shareGroup.Count()
+                orderby (totalViews + totalComments + totalShares) descending
+                select post
+                ).Take(100).ToList();*/
+                var posts = _postService.Get(post => true).ToList();
+                
+                var returnPosts = 
+                    from postDetail in postDetailsQuery
+                    join post in posts on postDetail.PostId equals post.Id
+                    select new { Post = post };
+                returnPosts.Distinct();
+                 
             return new ValueTask<List<BlogPost>>(posts);
         }
     }
