@@ -1,15 +1,10 @@
 ﻿using Shared.Models.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Shared.Models.Entities;
 
 namespace DiscoverySection.Services.PopuplarPostService
 {
     public interface IPopularPostService
     {
-        public List<BlogPost> GetPopularPosts();
+        // TODO : map this to other model in compositon service
+        public ValueTask<List<BlogPost>> GetPopularPostsAsync();
     }
 }

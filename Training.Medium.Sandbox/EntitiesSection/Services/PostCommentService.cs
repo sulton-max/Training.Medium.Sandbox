@@ -7,9 +7,9 @@ namespace EntitiesSection.Services;
 
 public class PostCommentService : IPostCommentService
 {
-    private readonly AppFileContext _appDataContext;
+    private readonly IDataContext _appDataContext;
 
-    public PostCommentService(AppFileContext appDataContext)
+    public PostCommentService(IDataContext appDataContext)
     {
         _appDataContext = appDataContext;
     }
@@ -69,8 +69,8 @@ public class PostCommentService : IPostCommentService
 
         foundComment.PostId = postComment.PostId;
         foundComment.Id = postComment.Id;
-        foundComment.UserId = postComment.UserId;
-        foundComment.ClapsCount = postComment.ClapsCount;
+        foundComment.CommenterId = postComment.CommenterId;
+        foundComment.Message = postComment.Message;
 
         await _appDataContext.SaveChangesAsync();
         return foundComment;

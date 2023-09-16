@@ -7,10 +7,10 @@ namespace EntitiesSection.Services
 {
     public class PostService : IPostService
     {
-        private readonly AppFileContext _appDataContext;
+        private readonly IDataContext _appDataContext;
         //private readonly IValidationService _validationService;
 
-        public PostService(AppFileContext appDataContext)    //IValidationService validationService
+        public PostService(IDataContext appDataContext)    //IValidationService validationService
         {
             _appDataContext = appDataContext;
             //_validationService = validationService;

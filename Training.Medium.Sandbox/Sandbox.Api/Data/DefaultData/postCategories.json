@@ -1,0 +1,54 @@
+﻿{
+    "Life": {
+        "Family": [
+            "Adoption",
+            "Children",
+            "Elder Care",
+            "Fatherhood",
+            "Motherhood",
+            "Parenting",
+            "Pregnancy",
+            "Seniors"
+        ],
+        "Health": [
+            "Aging",
+            "Coronavirus",
+            "Covid-19",
+            "Death And Dying",
+            "Disease",
+            "Fitness",
+            "Mens Health",
+            "Nutrition",
+            "Sleep",
+            "Vaccines",
+            "Weight Loss",
+            "Womens Health"
+        ]
+    },
+    "Self Improvement": {
+        "Mental Health": [
+            "Anxiety",
+            "Counseling",
+            "Grief",
+            "Life Lessons",
+            "Self-awareness",
+            "Stress",
+            "Therapy",
+            "Trauma"
+        ]
+    },
+    "Software Development": {
+        "Programming Languages": [
+            "Angular",
+            "CSS",
+            "HTML",
+            "Java",
+            "JavaScript",
+            "Nodejs",
+            "Python",
+            "React",
+            "Ruby",
+            "Typescript"
+        ]
+    }
+}

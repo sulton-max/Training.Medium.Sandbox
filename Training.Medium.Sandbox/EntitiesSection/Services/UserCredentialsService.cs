@@ -8,10 +8,10 @@ namespace EntitiesSection.Services;
 
 public class UserCredentialsService : IUserCredentialsService
 {
-    private readonly AppFileContext _appDataContext;
+    private readonly IDataContext _appDataContext;
     private readonly IValidationService _validationService;
 
-    public UserCredentialsService(AppFileContext appDataContext, IValidationService validationService)
+    public UserCredentialsService(IDataContext appDataContext, IValidationService validationService)
     {
         _appDataContext = appDataContext;
         _validationService = validationService;

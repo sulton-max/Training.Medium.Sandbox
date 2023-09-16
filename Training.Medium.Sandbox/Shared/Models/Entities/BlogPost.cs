@@ -1,4 +1,4 @@
-﻿using Shared.Models.Common;
+using Shared.Models.Common;
 using System.Reflection.Metadata;
 
 namespace Shared.Models.Entities;
@@ -20,6 +20,8 @@ public class BlogPost : SoftDeletedEntity
     public string Title { get; set; }
     public string Content { get; set; }
     public Guid AuthorId { get; set; }
+
+    // TODO : Add is banned property
 
     public override int GetHashCode()
     {

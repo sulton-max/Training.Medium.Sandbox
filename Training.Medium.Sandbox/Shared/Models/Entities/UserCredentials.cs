@@ -7,6 +7,10 @@ public class UserCredentials : SoftDeletedEntity
     public string Password { get; set; }
     public Guid UserId { get; init; }
 
+    public UserCredentials()
+    {
+    }
+
     public UserCredentials(string password, Guid userId)
     {
         Id = Guid.NewGuid();
