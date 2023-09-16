@@ -1,14 +1,9 @@
-﻿using EntitiesSection.Services.Interfaces;
+﻿using System.Linq.Expressions;
+using EntitiesSection.Services.Interfaces;
 using Shared.DataAccess.Contexts;
 using Shared.Models.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace EntitiesSection
+namespace EntitiesSection.Services
 {
     public class PostDetailsService : IPostDetailsService
     {

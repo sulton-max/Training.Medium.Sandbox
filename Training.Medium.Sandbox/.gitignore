@@ -477,4 +477,4 @@ $RECYCLE.BIN/
 *.lnk
 
 # Data storage files
-/Data/DataStorage
+*/Data/DataStorage

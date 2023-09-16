@@ -11,7 +11,7 @@ public interface IDataContext : IAsyncDisposable
     IFileSet<PostView, Guid> PostViews { get; }
     IFileSet<UserCredentials, Guid> UserCredentials { get; }
     IFileSet<EmailTemplate, Guid> EmailTemplates { get; }
-    IFileSet<BlogPostShare, Guid> PostShares { get; }
+    IFileSet<PostShare, Guid> PostShares { get; }
     IFileSet<PostFeedback, Guid> PostFeedbacks { get; }
     IFileSet<PostDetails, Guid> PostDetails { get; }
 

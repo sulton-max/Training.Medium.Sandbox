@@ -10,13 +10,13 @@ namespace EntitiesSection.Services.Interfaces
 {
     public interface IPostShareService
     {
-        IQueryable<BlogPostShare> Get(Expression<Func<BlogPostShare, bool>> predicate);
+        IQueryable<PostShare> Get(Expression<Func<PostShare, bool>> predicate);
 
-        ValueTask<ICollection<BlogPostShare>> GetAsync(IEnumerable<Guid> ids);
+        ValueTask<ICollection<PostShare>> GetAsync(IEnumerable<Guid> ids);
 
-        ValueTask<BlogPostShare?> GetByIdAsync(Guid id);
+        ValueTask<PostShare?> GetByIdAsync(Guid id);
 
-        ValueTask<BlogPostShare> SendAsync(BlogPostShare user, bool saveChanges = true);
+        ValueTask<PostShare> SendAsync(PostShare user, bool saveChanges = true);
         
     }
 }

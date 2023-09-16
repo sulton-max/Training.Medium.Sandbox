@@ -11,6 +11,7 @@ public class PostFeedbackService : IPostFeedbackService
 
     public PostFeedbackService(IDataContext appFileContext)
         => _appDateContext = appFileContext;
+
     public async Task ClapAsync(Guid postId, Guid userId)
     {
         var IsExistInData = _appDateContext.PostFeedbacks

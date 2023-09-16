@@ -22,24 +22,24 @@ namespace EntitiesSection.Services
             _validationService = validationService;
         }
 
-        public IQueryable<BlogPostShare> Get(Expression<Func<BlogPostShare, bool>> predicate)
+        public IQueryable<PostShare> Get(Expression<Func<PostShare, bool>> predicate)
         {
             return _appDataContext.PostShares.Where(predicate.Compile()).AsQueryable();
         }
 
-        public ValueTask<ICollection<BlogPostShare>> GetAsync(IEnumerable<Guid> ids)
+        public ValueTask<ICollection<PostShare>> GetAsync(IEnumerable<Guid> ids)
         {
             var sharing = _appDataContext.PostShares.Where(sharings => ids.Contains(sharings.Id));
-            return new ValueTask<ICollection<BlogPostShare>>(sharing.ToList());
+            return new ValueTask<ICollection<PostShare>>(sharing.ToList());
         }
 
-        public ValueTask<BlogPostShare?> GetByIdAsync(Guid id)
+        public ValueTask<PostShare?> GetByIdAsync(Guid id)
         {
             var sharing = _appDataContext.PostShares.FirstOrDefault(sharing => sharing.Id == id);
-            return new ValueTask<BlogPostShare?>(sharing);
+            return new ValueTask<PostShare?>(sharing);
         }
 
-        public async ValueTask<BlogPostShare> SendAsync(BlogPostShare sharing, bool saveChanges = true)
+        public async ValueTask<PostShare> SendAsync(PostShare sharing, bool saveChanges = true)
         {
             // var validation = ValidateOnCreate(user);
             // if (validation is not null) throw validation;
@@ -52,7 +52,7 @@ namespace EntitiesSection.Services
             return sharing;
         }
 
-        private bool isValidSendingPost(BlogPostShare sharing)
+        private bool isValidSendingPost(PostShare sharing)
         {
             var validationSharingPost = _appDataContext.PostShares.FirstOrDefault(x => x.UserId == sharing.UserId && x.PostId == sharing.PostId);
             if (validationSharingPost != null)
@@ -64,7 +64,7 @@ namespace EntitiesSection.Services
 
        
         
-        //private ValidationException? ValidateOnCreate(BlogPostShare sharing)
+        //private ValidationException? ValidateOnCreate(PostShare sharing)
         //{
         //    var exceptions = new List<Exception>();
         //    if (!_validationService.IsValidName(sharing.FirstName + " " + sharing.LastName))

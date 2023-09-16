@@ -7,6 +7,8 @@ public class PostFeedback : SoftDeletedEntity
     public Guid UserId { get; set; }
     public Guid PostId { get; set; }
     public int UserClaps { get; set; }
+
+    // TODO : Why claps limit not claps count ?
     public int ClapsLimit = 50;
 
     public PostFeedback(Guid userId, Guid postId, int userClaps = 1)

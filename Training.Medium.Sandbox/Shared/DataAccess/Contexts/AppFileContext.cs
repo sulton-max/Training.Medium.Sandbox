@@ -16,7 +16,7 @@ public class AppFileContext : IDataContext
     public IFileSet<PostView, Guid> PostViews { get; }
     public IFileSet<UserCredentials, Guid> UserCredentials { get; }
     public IFileSet<EmailTemplate, Guid> EmailTemplates { get; }
-    public IFileSet<BlogPostShare, Guid> PostShares { get; }
+    public IFileSet<PostShare, Guid> PostShares { get; }
     public IFileSet<PostFeedback, Guid> PostFeedbacks { get; }
 
     public AppFileContext(string folderPath)
@@ -31,7 +31,7 @@ public class AppFileContext : IDataContext
         PostViews = new FileSet<PostView, Guid>(folderPath, serializer, provider);
         UserCredentials = new FileSet<UserCredentials, Guid>(folderPath, serializer, provider);
         EmailTemplates = new FileSet<EmailTemplate, Guid>(folderPath, serializer, provider);
-        PostShares = new FileSet<BlogPostShare, Guid>(folderPath, serializer, provider);
+        PostShares = new FileSet<PostShare, Guid>(folderPath, serializer, provider);
     }
 
     public virtual async ValueTask FetchAsync()
