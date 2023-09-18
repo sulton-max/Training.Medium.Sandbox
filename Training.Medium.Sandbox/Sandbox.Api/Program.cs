@@ -3,6 +3,7 @@ using DiscoverySection.Services.Trending_PostService;
 using EntitiesSection;
 using EntitiesSection.Services;
 using EntitiesSection.Services.Interfaces;
+using FileBaseContext.Context.Models.Configurations;
 using MembershipSection.Services;
 using MembershipSection.Services.Interfaces;
 using NotificationsSection.Services;
@@ -19,7 +20,8 @@ builder.Services.AddSingleton<IValidationService, ValidationService>();
 // data access
 builder.Services.AddScoped<IDataContext, AppFileContext>(_ =>
 {
-    var context = new AppFileContext(Path.Combine(builder.Environment.ContentRootPath, "Data", "DataStorage"));
+    var contextOptions = new FileContextOptions<AppFileContext>(Path.Combine(builder.Environment.ContentRootPath, "Data", "DataStorage"));
+    var context = new AppFileContext(contextOptions);
     context.FetchAsync().AsTask().Wait();
 
     return context;

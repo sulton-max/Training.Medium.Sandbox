@@ -25,16 +25,16 @@ public static class SeedData
             await fileContext.AddAsync<PostDetails>(30_000);
 
         if (!fileContext.PostViews.Any())
-            await fileContext.AddAsync<PostView>(1000);
+            await fileContext.AddAsync<PostView>(1_000);
 
         if (!fileContext.PostShares.Any())
-            await fileContext.AddAsync<PostShare>(1000);
+            await fileContext.AddAsync<PostShare>(10_000);
 
         if (!fileContext.PostComments.Any())
-            await fileContext.AddAsync<PostComment>(1000);
+            await fileContext.AddAsync<PostComment>(10_000);
 
         if (!fileContext.PostFeedbacks.Any())
-            await fileContext.AddAsync<PostFeedback>(1000);
+            await fileContext.AddAsync<PostFeedback>(10_000);
 
         // notifications
         if (!fileContext.EmailTemplates.Any())
@@ -55,6 +55,7 @@ public static class SeedData
             { } t when t == typeof(PostShare) => context.AddPostSharesAsync(count),
             { } t when t == typeof(PostComment) => context.AddPostCommentsAsync(count),
             { } t when t == typeof(PostFeedback) => context.AddPostFeedback(count),
+            { } t when t == typeof(EmailTemplate) => context.AddEmailTemplates(count),
             _ => new ValueTask(Task.CompletedTask)
         };
 
@@ -67,13 +68,14 @@ public static class SeedData
     {
         var faker = EntityFakers.GetUserFaker(context);
         var uniqueUsers = new HashSet<User>(faker.Generate(100_000));
+        var test = uniqueUsers.Take(count);
         await context.Users.AddRangeAsync(uniqueUsers.Take(count));
     }
 
     private static async ValueTask AddUserCredentials(this IDataContext context, int count)
     {
         var faker = EntityFakers.GetUserCredentialsFaker(context);
-        var userCredentials = faker.Generate(100_000);
+        var userCredentials = faker.Generate(context.Users.Count());
         await context.UserCredentials.AddRangeAsync(userCredentials.Take(count));
     }
 
@@ -133,6 +135,16 @@ public static class SeedData
     #endregion
 
     #region Notifications
+
+    private static async ValueTask AddEmailTemplates(this IDataContext context, int count)
+    {
+        var list = new List<EmailTemplate>
+        {
+
+        };
+
+        await context.EmailTemplates.AddRangeAsync(list.Take(count));
+    }
 
     #endregion
 }
