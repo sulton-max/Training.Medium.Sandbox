@@ -9,9 +9,10 @@ namespace EntitiesSection.Services;
 public class UserCredentialsService : IUserCredentialsService
 {
     private readonly IDataContext _appDataContext;
+    private readonly IPasswordHasherService _passwordHasherService;
     private readonly IValidationService _validationService;
 
-    public UserCredentialsService(IDataContext appDataContext, IValidationService validationService)
+    public UserCredentialsService(IDataContext appDataContext, IValidationService validationService, IPasswordHasherService passwordHasherService)
     {
         _appDataContext = appDataContext;
         _passwordHasherService = passwordHasherService;
