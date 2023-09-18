@@ -75,4 +75,45 @@ public class PostCommentService : IPostCommentService
         await _appDataContext.SaveChangesAsync();
         return foundComment;
     }
+    private bool IsValidCreatedComment(PostComment comment)
+    {
+        var existingComment = _appDataContext.PostComments.FirstOrDefault(x => x.CommenterId == comment.CommenterId &&
+                                                                               x.IsDeleted == false &&
+                                                                               x.PostId == comment.PostId &&
+                                                                               x.Message != null);
+        if (existingComment != null)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    private bool IsValidUpdatedComment(PostComment comment)
+    {
+        var updatingPostComment = _appDataContext.PostComments.FirstOrDefault(x => x.CommenterId == comment.CommenterId &&
+            x.IsDeleted == false &&
+            x.PostId == comment.PostId &&
+            x.Message!= null);
+        if (updatingPostComment != null)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    private bool IsValidDeletedComment(PostComment comment)
+    {
+        var deletingPostComment = _appDataContext.PostComments.FirstOrDefault(x => x.CommenterId == comment.CommenterId &&
+            x.IsDeleted == false &&
+            x.PostId == comment.PostId &&
+            x.Message != null);
+        if (deletingPostComment!= null)
+        {
+            return true;
+        }
+
+        return false;
+    }
 }
