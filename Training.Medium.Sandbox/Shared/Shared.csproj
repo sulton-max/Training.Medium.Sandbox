@@ -15,5 +15,4 @@
         <PackageReference Include="Max.FileBaseContext.Context" Version="0.0.4" />
     </ItemGroup>
 
-
 </Project>

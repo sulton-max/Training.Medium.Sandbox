@@ -40,6 +40,7 @@ public class AppFileContext : FileContext, IDataContext
 
     public AppFileContext(IFileContextOptions<AppFileContext> fileContextOptions) : base(fileContextOptions)
     {
+        OnSaveChanges += AddPrimaryKeys;
     }
 
     public virtual ValueTask AddPrimaryKeys(IEnumerable<IFileSetBase> fileSets)

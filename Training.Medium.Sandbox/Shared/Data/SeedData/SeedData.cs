@@ -129,7 +129,6 @@ public static class SeedData
         var uniquePostFeedbacks = new HashSet<PostFeedback>(faker.Generate(100_000));
 
         await context.PostFeedbacks.AddRangeAsync(uniquePostFeedbacks.Take(count));
-        await context.SaveChangesAsync();
     }
 
     #endregion
