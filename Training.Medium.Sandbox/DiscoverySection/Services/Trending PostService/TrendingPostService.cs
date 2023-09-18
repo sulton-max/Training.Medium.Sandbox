@@ -37,7 +37,7 @@ namespace DiscoverySection.Services.Trending_PostService
             _postFeedbackService = postFeedbackService;
             _viewService = postViewService;
         }
-        public async ValueTask<List<BlogPost>> GetTrendingPostsAsync()
+        public ValueTask<List<BlogPost>> GetTrendingPostsAsync()
         {
             var postsQuery = _postService.Get(post => true);
             var postViewsQuery = _viewService.Get(post => true);
@@ -49,14 +49,16 @@ namespace DiscoverySection.Services.Trending_PostService
             var trendingPostsQuery =
                 from post in postsQuery
                 join postView in postViewsQuery on post.Id equals postView.PostId
-                join postShare in postShareQuery on post.Id equals postShare.PostId
-                join postComment in postCommentsQuery on post.Id equals postComment.PostId
-                join postFeedback in postCommentsQuery on post.Id equals postFeedback.PostId
-                select new { Posts = post, Views = postView, Feedbacks = postFeedback, PostShares = postShare };
+                // join postShare in postShareQuery on post.Id equals postShare.PostId
+                // join postComment in postCommentsQuery on post.Id equals postComment.PostId
+                // join postFeedback in postCommentsQuery on post.Id equals postFeedback.PostId
+                // select new { Posts = post, Views = postView, Feedbacks = postFeedback, PostShares = postShare };
+                select new { Posts = post, PostView = postView};
 
-            //var trendingPosts = trendingPostsQuery.ToList();
+            var trendingPosts = trendingPostsQuery.ToList();
 
-            return trendingPostsQuery.Select(result => result.Posts).ToList();
+            // return trendingPostsQuery.Select(result => result.Posts).ToList();x
+            return new ValueTask<List<BlogPost>>(trendingPosts.Select(result => result.Posts).ToList());
         }
     }
 }
