@@ -10,6 +10,6 @@ namespace NotificationsSection.Services.Interfaces
 {
     public interface IEmailMessageService
     {
-        ValueTask<EmailMessage> ConvertToMessage(EmailTemplate template, Dictionary<string, string> values);       
+        ValueTask<EmailMessage> ConvertToMessage(EmailTemplate template, Dictionary<string, string> values, string sender, string receiver);       
     }
 }
