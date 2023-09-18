@@ -6,6 +6,7 @@ namespace DiscoverySection.Services.DiscoveryService
     public class DiscoveryService : IDiscoveryService
     {
         private IPopularPostService _popularPostInstance;
+        // post details must 
 
         public DiscoveryService(IPopularPostService popularPostService)
         {
@@ -14,6 +15,12 @@ namespace DiscoverySection.Services.DiscoveryService
 
         public DiscoveryTopics GetMostCommonTopics()
         {
+            /*discoveryTopics.Topics.Add(
+            var  popularTopics = await _popularPostInstance.GetPopularPostsAsync());
+            var discoveryTopics = new DiscoveryTopics();
+            discoveryTopics.Topics = new List<string>();
+            
+            */
             return new DiscoveryTopics();
         }
     }
