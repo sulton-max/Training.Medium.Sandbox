@@ -55,6 +55,7 @@ public static class SeedData
             { } t when t == typeof(PostShare) => context.AddPostSharesAsync(count),
             { } t when t == typeof(PostComment) => context.AddPostCommentsAsync(count),
             { } t when t == typeof(PostFeedback) => context.AddPostFeedback(count),
+            { } t when t == typeof(EmailTemplate) => context.AddEmailTemplates(count),
             _ => new ValueTask(Task.CompletedTask)
         };
 
@@ -134,6 +135,16 @@ public static class SeedData
     #endregion
 
     #region Notifications
+
+    private static async ValueTask AddEmailTemplates(this IDataContext context, int count)
+    {
+        var list = new List<EmailTemplate>
+        {
+
+        };
+
+        await context.EmailTemplates.AddRangeAsync(list.Take(count));
+    }
 
     #endregion
 }
