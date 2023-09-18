@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Shared.Models.Entities;
 
 namespace NotificationsSection.Services.Interfaces
 {
-    internal class IEmailPlaceholderService
+    public interface IEmailPlaceholderService
     {
+        ValueTask<(EmailTemplate, Dictionary<string, string>)> GetTemplateValues(Guid userId, EmailTemplate template);
     }
 }
