@@ -1,16 +1,16 @@
-﻿using BCrypt;
+﻿using EntitiesSection.Services.Interfaces;
+
 namespace EntitiesSection.Services;
 
-public static class PasswordHasher
+public class PasswordHasherService : IPasswordHasherService
 {
-    public static string Hash(string password)
+    public string Hash(string password)
     {
         var saltWorkFactor = DateTime.Now.Second % 10;
         var hash = BCrypt.Net.BCrypt.EnhancedHashPassword(password, saltWorkFactor);
         return hash;
     }
 
-    public static bool Verify(string password, string hash)
+    public bool Verify(string password, string hash)
         => BCrypt.Net.BCrypt.EnhancedVerify(password, hash);
-    
 }

@@ -14,6 +14,7 @@ public class UserCredentialsService : IUserCredentialsService
     public UserCredentialsService(IDataContext appDataContext, IValidationService validationService)
     {
         _appDataContext = appDataContext;
+        _passwordHasherService = passwordHasherService;
         _validationService = validationService;
     }
 
@@ -22,7 +23,7 @@ public class UserCredentialsService : IUserCredentialsService
         if (!ValidateOnCreate(userCredentials))
             throw new ValidationException("Invalid user credentials!");
 
-        userCredentials.Password = PasswordHasher.Hash(userCredentials.Password);
+        userCredentials.Password = _passwordHasherService.Hash(userCredentials.Password);
         await _appDataContext.UserCredentials.AddAsync(userCredentials);
 
         if (saveChanges)
@@ -64,7 +65,6 @@ public class UserCredentialsService : IUserCredentialsService
     public async ValueTask<UserCredentials> GetById(Guid id)
     {
         var userCredentials = await _appDataContext.UserCredentials.FindAsync(id);
-        //var userCredentials = _appDataContext.UserCredentials.FirstOrDefault(credentials => credentials.Id == id);
         if (userCredentials == null)
             throw new ArgumentOutOfRangeException(nameof(id), "User Credentails with the given id not found!");
 
@@ -77,10 +77,10 @@ public class UserCredentialsService : IUserCredentialsService
             throw new ValidationException("Invalid user credentials!");
 
         var oldCredentials = await GetById(userCredentials.Id);
-        if (!PasswordHasher.Verify(oldPassword, oldCredentials.Password))
+        if (!_passwordHasherService.Verify(oldPassword, oldCredentials.Password))
             throw new ArgumentOutOfRangeException(nameof(oldPassword), "Incorrect old Password!");
 
-        oldCredentials.Password = PasswordHasher.Hash(userCredentials.Password);
+        oldCredentials.Password = _passwordHasherService.Hash(userCredentials.Password);
         oldCredentials.ModifiedDate = DateTime.UtcNow;
 
         if (saveChanges)
