@@ -21,6 +21,16 @@ namespace DiscoverySection.Services.DiscoveryService
             discoveryTopics.Topics = new List<string>();
             
             */
+
+            // var popularPosts = _popularPostInstance.GetPopularPostsAsync();
+            //
+            // var returnPosts =
+            //     from postDetail in postDetailsQuery
+            //     join post in posts on postDetail.PostId equals post.Id
+            //     select postDetail.Category;
+            //
+            // returnPosts.Distinct();
+
             return new DiscoveryTopics();
         }
     }
