@@ -14,6 +14,7 @@ namespace NotificationsSection.Services
         private const string _lastName = "{{LastName}}";
         private const string _email = "{{EmailAddress}}";
         private const string _date = "{{Date}}";
+        private const string _companyName = "{{CompanyName}}";
 
         public EmailPlaceholderService(IUserService userService)
         {
@@ -34,6 +35,7 @@ namespace NotificationsSection.Services
                     _firstName =>user.FirstName,
                     _lastName=>user.LastName,
                     _date=>DateTime.Now.ToString("dd.MM.yyyy"),
+                    _companyName => "Medium",
                     _ => throw new EvaluateException("Invalid placeholder")
                 };
 
