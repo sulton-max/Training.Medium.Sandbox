@@ -1,4 +1,4 @@
-﻿using FileContext.Abstractions.Models.Entity;
+﻿using FileBaseContext.Abstractions.Models.Entity;
 
 namespace Shared.Models.Common;
 

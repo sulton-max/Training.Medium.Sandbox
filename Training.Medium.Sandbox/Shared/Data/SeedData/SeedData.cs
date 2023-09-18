@@ -67,6 +67,7 @@ public static class SeedData
     {
         var faker = EntityFakers.GetUserFaker(context);
         var uniqueUsers = new HashSet<User>(faker.Generate(100_000));
+        var test = uniqueUsers.Take(count);
         await context.Users.AddRangeAsync(uniqueUsers.Take(count));
     }
 

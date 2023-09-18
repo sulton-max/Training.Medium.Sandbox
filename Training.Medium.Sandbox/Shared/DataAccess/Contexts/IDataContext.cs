@@ -1,4 +1,4 @@
-﻿using FileContext.Abstractions.Models.FileSet;
+﻿using FileBaseContext.Abstractions.Models.FileSet;
 using Shared.Models.Entities;
 
 namespace Shared.DataAccess.Contexts;
