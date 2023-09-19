@@ -27,6 +27,7 @@ public class FakeDataGenerator : IFakeDataGenerator
         Faker<Post> fakePosts = new Faker<Post>()
                         .RuleFor(post => post.Id, post => lastId++)
                         .RuleFor(post => post.AuthorId, AuthorId => random.Next(1, 50))
+                        .RuleFor(post => post.CreatedDateTime, CreatedDateTime => CreatedDateTime.Date.Past())
                         .RuleFor(post => post.Title, Title => Title.Lorem.Letter(5))
                         .RuleFor(post => post.Description, Description => Description.Lorem.Letter(15));
 

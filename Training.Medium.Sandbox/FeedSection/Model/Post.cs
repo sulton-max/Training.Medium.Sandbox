@@ -1,16 +1,16 @@
 using Bogus;
+using FeedSection.Commons;
 
 namespace FeedSection;
 
-public class Post
+public class Post : Auditables
 {
-    public long Id { get; set; }
     public long AuthorId { get; set; }
     public string Title { get; set; }
     public string Description { get; set; }
 
     public override string ToString()
     {
-        return $"{Id} {AuthorId} {Title} {Description}\n";
+        return $"PostID: {Id} AuthorID: {AuthorId} CreatedTime: {CreatedDateTime} Title: {Title} Description: {Description}\n";
     }
 }
