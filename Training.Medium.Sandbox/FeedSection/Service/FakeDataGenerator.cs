@@ -51,7 +51,11 @@ public class FakeDataGenerator : IFakeDataGenerator
 
     public IEnumerable<FeedPost> GetFeedPost(int countOfData)
     {
+        var authors = GetAuthor(countOfData);
+        var posts = GetPost(countOfData);
+        var postDetails = GetPostDetails(countOfData);
+        var feedPost = new Faker<FeedPost>();
         
-        throw new NotImplementedException();
+        return feedPost.Generate(countOfData);
     }
 }
