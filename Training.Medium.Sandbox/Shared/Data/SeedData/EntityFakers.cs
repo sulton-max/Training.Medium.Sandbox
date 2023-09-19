@@ -69,6 +69,7 @@ internal static class EntityFakers
 
     internal static Faker<PostView> GetPostViewFaker(IDataContext context)
     {
+        // var postsId = new Stack<Guid>(context.Posts.Select(user => user.Id));
         return new Faker<PostView>()
             .RuleFor(keySelector => keySelector.Id, Guid.NewGuid)
             .RuleFor(keySelector => keySelector.PostId, source => source.PickRandom(context.Posts.Select(post => post.Id)))
@@ -77,6 +78,7 @@ internal static class EntityFakers
 
     internal static Faker<PostShare> GetPostShareFaker(IDataContext context)
     {
+        // var postsId = new Stack<Guid>(context.Posts.Select(user => user.Id));
         return new Faker<PostShare>()
             .RuleFor(keySelector => keySelector.Id, Guid.NewGuid)
             .RuleFor(keySelector => keySelector.PostId, source => source.PickRandom(context.Posts.Select(post => post.Id)))
@@ -86,16 +88,18 @@ internal static class EntityFakers
 
     internal static Faker<PostComment> GetPostCommentFaker(IDataContext context)
     {
-        var socialMedia = EnumExtensions.GetValuesAsString<SocialMedia>();
+        var postsId = new Stack<Guid>(context.Posts.Select(user => user.Id));
+
         return new Faker<PostComment>()
             .RuleFor(keySelector => keySelector.Id, Guid.NewGuid)
-            .RuleFor(keySelector => keySelector.PostId, Guid.NewGuid)
-            .RuleFor(keySelector => keySelector.CommenterId, Guid.NewGuid)
+            .RuleFor(keySelector => keySelector.PostId, source => source.PickRandom(context.Posts.Select(post => post.Id)))
+            .RuleFor(keySelector => keySelector.CommenterId, source => source.PickRandom(context.Users.Select(user => user.Id)))
             .RuleFor(keySelector => keySelector.Message, source => source.Lorem.Paragraph(5));
     }
 
     internal static Faker<PostFeedback> GetPostFeedbackFaker(IDataContext context)
     {
+        var postsId = new Stack<Guid>(context.Posts.Select(user => user.Id));
         var random = new Random();
         return new Faker<PostFeedback>()
             .RuleFor(keySelector => keySelector.Id, Guid.NewGuid)

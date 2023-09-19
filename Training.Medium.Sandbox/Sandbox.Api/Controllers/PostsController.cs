@@ -1,4 +1,5 @@
-﻿using DiscoverySection.Services.PopuplarPostService;
+﻿using DiscoverySection.Services.DiscoveryService;
+using DiscoverySection.Services.PopuplarPostService;
 using DiscoverySection.Services.Trending_PostService;
 using EntitiesSection.Services.Interfaces;
 using Microsoft.AspNetCore.Http.HttpResults;
@@ -187,9 +188,9 @@ public class PostsController : ControllerBase
     }
 
     [HttpGet("popular")]
-    public async ValueTask<IActionResult> GetPopularPosts([FromServices] IPopularPostService popularPostService)
+    public IActionResult GetPopularPosts([FromServices] IPopularPostService popularPostService)
     {
-        var result = await popularPostService.GetPopularPostsAsync();
+        var result = popularPostService.GetPopularPosts().ToList();
         return result.Any() ? Ok(result) : NotFound();
     }
 
@@ -204,6 +205,13 @@ public class PostsController : ControllerBase
     public IActionResult GetNewPosts()
     {
         throw new NotImplementedException();
+    }
+
+    [HttpGet("topics")]
+    public async ValueTask<IActionResult> GetDiscoveryTopics([FromServices]IDiscoveryService discoveryService)
+    {
+        var result = await discoveryService.GetMostCommonTopics();
+        return result.Topics.Any() ? Ok(result) : NotFound();
     }
 
     #endregion
