@@ -139,6 +139,12 @@ public static class SeedData
     {
         var list = new List<EmailTemplate>
         {
+            new EmailTemplate() { Subject = "Welcome to our system!", Body = "Hi {{FullName}}, welcome to our system!" },
+            new EmailTemplate() { Subject = "Account activated", Body = "Dear {{FullName}}, We are pleased to inform you that your account has been activated. You can now log in and start using our system."},
+            new EmailTemplate() { Subject = "Account deleted", Body = "Dear {{FullName}}, We are sorry to inform you that your account has been deleted from our system. This action was taken because [reason for account deletion]." }
+            new EmailTemplate() { Subject = "Your password has been reset", Body = "Dear {{FullName}}, Your password has been reset. Your new password is: {{NewPassword}}." },
+            new EmailTemplate() { Subject = "Your account has been suspended", Body = "Dear {{FullName}}, Your account has been suspended. Please contact us for more information." },
+            new EmailTemplate() { Subject = "Account update email", Body = "Your account has been updated. Your new account details are as follows: [account details]" }
 
         };
 
