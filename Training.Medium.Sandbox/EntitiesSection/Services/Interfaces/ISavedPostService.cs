@@ -5,7 +5,7 @@ namespace EntitiesSection.Services.Interfaces;
 
 public interface ISavedPostService
 {
-    IQueryable<SavedPost> Get(Expression<Func<User, bool>> predicate);
+    IQueryable<SavedPost> Get(Expression<Func<SavedPost, bool>> predicate);//change User to SavedPost
 
     ValueTask<ICollection<SavedPost>> GetByUserIdAsync(IEnumerable<Guid> ids);
 
