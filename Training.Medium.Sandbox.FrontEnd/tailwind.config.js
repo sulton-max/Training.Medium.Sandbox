@@ -10,6 +10,7 @@ export default {
             },
             fontFamily: {
                 'times': ['Times New Roman', 'serif'],
+                'main': ['Roboto', 'sans-serif']
             }
         },
     },

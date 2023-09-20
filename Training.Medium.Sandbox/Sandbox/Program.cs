@@ -1,11 +1,9 @@
-﻿using Sandbox.Data.Context;
-using Sandbox.Data.SeedData;
+using FeedSection.Service;
 
-var context = TestingContext.Instance;
-await context.InitializeAsync();
-
-var users = await context.Users.ToListAsync();
-foreach (var user in users)
+Console.WriteLine("================================");
+var dataGenerator= new FakeDataGenerator();
+var feed = dataGenerator.GetFeedPost(10);
+foreach (var item in feed)
 {
-    Console.WriteLine(user);
+    Console.WriteLine(item);
 }

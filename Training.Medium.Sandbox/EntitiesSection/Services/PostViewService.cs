@@ -3,13 +3,13 @@ using EntitiesSection.Services.Interfaces;
 using Shared.DataAccess.Contexts;
 using Shared.Models.Entities;
 
-namespace EntitiesSection;
+namespace EntitiesSection.Services;
 
 public class PostViewService : IPostViewService
 {
-    private readonly AppFileContext _appDataContext;
+    private readonly IDataContext _appDataContext;
 
-    public PostViewService(AppFileContext appDataContext)
+    public PostViewService(IDataContext appDataContext)
     {
         _appDataContext = appDataContext;
     }

@@ -2,8 +2,6 @@ using Shared.Models.Common;
 
 namespace Shared.Models.Entities;
 
-using FileContext.Abstractions.Models.Entity;
-
 public class User : SoftDeletedEntity
 {
     public string FirstName { get; set; }
@@ -13,7 +11,7 @@ public class User : SoftDeletedEntity
 
     public User()
     {
-        
+
     }
 
     public User(Guid id, string firstName, string lastName, string emailAddress, string phoneNumber)
