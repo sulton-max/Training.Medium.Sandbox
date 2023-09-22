@@ -8,11 +8,6 @@ namespace DiscoverySection.Models
 {
     public class DiscoveryTopics
     {
-        public List<string> Topics;
-        public DiscoveryTopics()
-        {
-            Topics = new List<string>();
-
-        }
+        public List<string> Topics = new();
     }
 }

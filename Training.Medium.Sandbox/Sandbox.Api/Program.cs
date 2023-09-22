@@ -1,3 +1,4 @@
+using DiscoverySection.Services.DiscoveryService;
 using DiscoverySection.Services.PopuplarPostService;
 using DiscoverySection.Services.Trending_PostService;
 using EntitiesSection;
@@ -40,6 +41,7 @@ builder.Services.AddScoped<IPostViewService, PostViewService>();
 builder.Services.AddScoped<IPostCommentService, PostCommentService>();
 builder.Services.AddScoped<IPopularPostService, PopularPostService>();
 builder.Services.AddScoped<ITrendingPostService, TrendingPostService>();
+builder.Services.AddScoped<IDiscoveryService, DiscoveryService>();
 
 // post analysis
 

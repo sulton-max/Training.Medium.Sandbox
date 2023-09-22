@@ -1,10 +1,10 @@
 using Bogus;
+using FeedSection.Commons;
 
 namespace FeedSection;
 
-public class PostDetails
+public class PostDetails: Auditables
 {
-    public long Id { get; set; }
     public long PostId { get; set; }
     public bool IsMembershipPost { get; set; }
     public int Likes { get; set; }
