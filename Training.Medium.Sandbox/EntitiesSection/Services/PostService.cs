@@ -49,6 +49,7 @@ namespace EntitiesSection.Services
 
         public IQueryable<BlogPost> Get(Expression<Func<BlogPost, bool>> predicate)
         {
+            // var test = predicate.Compile();
             return _appDataContext.Posts.Where(predicate.Compile()).AsQueryable();
         }
 

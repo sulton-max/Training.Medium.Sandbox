@@ -34,7 +34,7 @@
 
       <!-- Post details -->
       <div>
-        <div class="flex gap-1 items-center justify-center">
+        <div class="flex gap-1 items-center justify-center">l
           <span class="text-sm color-[#6B6B6B]">Sep 5</span>
           <span class="text-sm color-[#6B6B6B]">·</span>
           <span class="text-sm color-[#6B6B6B]">8 min read</span>
