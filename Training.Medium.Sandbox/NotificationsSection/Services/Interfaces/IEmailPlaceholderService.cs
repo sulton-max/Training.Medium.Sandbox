@@ -4,6 +4,6 @@ namespace NotificationsSection.Services.Interfaces
 {
     public interface IEmailPlaceholderService
     {
-        ValueTask<(EmailTemplate, Dictionary<string, string>)> GetTemplateValues(Guid userId, EmailTemplate template);
+        ValueTask<Dictionary<string, string>> GetTemplateValues(Guid userId, EmailTemplate template);
     }
 }
