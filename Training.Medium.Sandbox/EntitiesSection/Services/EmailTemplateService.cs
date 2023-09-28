@@ -48,6 +48,7 @@ public class EmailTemplateService : IEmailTemplateService
             throw new InvalidOperationException("EmailTemplate not found");
         foundEmailTemplate.Subject = emailTemplate.Subject;
         foundEmailTemplate.Body = emailTemplate.Body; 
+        
 
         await _appDateContext.SaveChangesAsync();
         return foundEmailTemplate;
@@ -72,8 +73,4 @@ public class EmailTemplateService : IEmailTemplateService
         await _appDateContext.SaveChangesAsync();
         return foundEmailTemplate;
     }
-
-
-
-
 }
