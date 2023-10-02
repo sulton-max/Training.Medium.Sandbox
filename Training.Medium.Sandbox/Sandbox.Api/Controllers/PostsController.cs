@@ -2,9 +2,12 @@
 using DiscoverySection.Services.PopuplarPostService;
 using DiscoverySection.Services.Trending_PostService;
 using EntitiesSection.Services.Interfaces;
+using FeedSection;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using Sandbox.Api.Models.Dtos;
 using Shared.DataAccess.Contexts;
+using Shared.Models.Entities;
 
 namespace Sandbox.Api.Controllers;
 
@@ -31,27 +34,36 @@ public class PostsController : ControllerBase
     }
 
     [HttpGet("{postId:guid}")]
-    public IActionResult GetPostById()
+    public async ValueTask<IActionResult> GetPostById([FromRoute] Guid postId)
     {
-        throw new NotImplementedException();
+        var result = await _postService.GetByIdAsync(postId);
+        return result is not null ? Ok((BlogPostDto)result) : NotFound();
     }
 
     [HttpPost]
-    public IActionResult CreatePost()
+    public async ValueTask<IActionResult> CreatePost([FromBody]  BlogPostDto blogPost)
     {
-        throw new NotImplementedException();
+        var result = await _postService.CreateAsync((BlogPost)blogPost);
+        return CreatedAtAction(nameof(GetPostById),
+            new
+            {
+                postId = result.Id
+            },
+            result);
     }
 
     [HttpPut]
-    public IActionResult UpdatePost()
+    public async ValueTask<IActionResult> UpdatePost([FromBody]BlogPostDto model)
     {
-        throw new NotImplementedException();
+        var result = await _postService.UpdateAsync((BlogPost)model);
+        return NoContent();
     }
 
     [HttpDelete("{postId:guid}")]
-    public IActionResult DeletePost()
+    public async ValueTask<IActionResult> DeletePost([FromRoute]Guid postId)
     {
-        throw new NotImplementedException();
+        await _postService.DeleteAsync(postId);
+        return NoContent();
     }
 
     #endregion
@@ -195,7 +207,7 @@ public class PostsController : ControllerBase
     }
 
     [HttpGet("trending")]
-    public async ValueTask<IActionResult> GetTrendingPosts([FromServices]ITrendingPostService trendingPostService)
+    public async ValueTask<IActionResult> GetTrendingPosts([FromServices] ITrendingPostService trendingPostService)
     {
         var result = await trendingPostService.GetTrendingPostsAsync();
         return result.Any() ? Ok(result) : NotFound();
@@ -208,7 +220,7 @@ public class PostsController : ControllerBase
     }
 
     [HttpGet("topics")]
-    public async ValueTask<IActionResult> GetDiscoveryTopics([FromServices]IDiscoveryService discoveryService)
+    public async ValueTask<IActionResult> GetDiscoveryTopics([FromServices] IDiscoveryService discoveryService)
     {
         var result = await discoveryService.GetMostCommonTopics();
         return result.Topics.Any() ? Ok(result) : NotFound();

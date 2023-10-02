@@ -21,7 +21,7 @@ namespace NotificationsSection.Services
             _userService = userService;
         }
 
-        public async ValueTask<(EmailTemplate, Dictionary<string, string>)> GetTemplateValues(Guid userId, EmailTemplate template)
+        public async ValueTask<Dictionary<string, string>> GetTemplateValues(Guid userId, EmailTemplate template)
         {
             var placeholders = GetPlaceholders(template.Body);
 
@@ -32,8 +32,8 @@ namespace NotificationsSection.Services
                 var value = placeholder switch
                 {
                     _fullName => string.Join(user.FirstName, " ", user.LastName),
-                    _firstName =>user.FirstName,
-                    _lastName=>user.LastName,
+                    _firstName => user.FirstName,
+                    _lastName=> user.LastName,
                     _date=>DateTime.Now.ToString("dd.MM.yyyy"),
                     _companyName => "Medium",
                     _ => throw new EvaluateException("Invalid placeholder")
@@ -42,7 +42,7 @@ namespace NotificationsSection.Services
                 return new KeyValuePair<string, string>(placeholder, value);
             });
             var values = new Dictionary<string, string>(result);
-            return (template, values);
+            return values;
         }
 
         private IEnumerable<string> GetPlaceholders(string body)

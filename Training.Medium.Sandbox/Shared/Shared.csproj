@@ -12,7 +12,11 @@
 
     <ItemGroup>
         <PackageReference Include="Bogus" Version="34.0.2" />
-        <PackageReference Include="Max.FileBaseContext.Context" Version="0.0.4" />
+<!--        <PackageReference Include="Max.FileBaseContext.Context" Version="0.0.7" />-->
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\..\..\Contributions\FileBaseContext\src\FileBaseContext.Context\FileBaseContext.Context.csproj" />
     </ItemGroup>
 
 </Project>

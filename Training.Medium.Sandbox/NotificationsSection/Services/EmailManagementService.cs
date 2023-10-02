@@ -32,24 +32,26 @@ public class EmailManagementService : IEmailManagementService
         _userService = userService;
     }
 
-    public async ValueTask<bool> SendEmailAsync(Guid userId, Guid templateId)
+    public ValueTask<bool> SendEmailAsync(Guid userId, Guid templateId)
     {
-        var template = await _emailTemplateService.GetByIdAsync(templateId) ?? throw new InvalidOperationException();
-        var placeholders = await _emailPlaceholderService.GetTemplateValues(userId, template);
+        // var template = await _emailTemplateService.GetByIdAsync(templateId) ?? throw new InvalidOperationException();
+        // var placeholders = await _emailPlaceholderService.GetTemplateValues(userId, template);
+        //
+        // var user = await _userService.GetByIdAsync(userId) ?? throw new InvalidOperationException();
+        // var appEmailAddress = "";
+        //
+        // // Medium
+        // // Test
+        // // no-reply.medium-test@gmail.com
+        //
+        // var message = await _emailMessageService.ConvertToMessage(template, placeholders, userId, systemUserId);
+        // var result = await _emailSenderService.SendEmailAsync(message);
+        // var email = ToEmail(message);
+        // email.IsSent = result;
+        //
+        // await _emailService.CreateAsync(email);
 
-        var user = await _userService.GetByIdAsync(userId) ?? throw new InvalidOperationException();
-        var appEmailAddress = "";
-
-        // Medium
-        // Test
-        // no-reply.medium-test@gmail.com
-
-        var message = await _emailMessageService.ConvertToMessage(template, placeholders, userId, systemUserId);
-        var result = await _emailSenderService.SendEmailAsync(message);
-        var email = ToEmail(message);
-        email.IsSent = result;
-
-        await _emailService.CreateAsync(email);
+        return new ValueTask<bool>(true);
     }
 
     public ValueTask<bool> SendEmailAsync(Guid userId, string templateCategory)
