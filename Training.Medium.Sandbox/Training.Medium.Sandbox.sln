@@ -23,8 +23,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sandbox.Api", "Sandbox.Api\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MembershipSection", "MembershipSection\MembershipSection.csproj", "{B8966502-82F4-4880-8738-78350D454C1F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileBaseContext.Context", "..\..\..\Contributions\FileBaseContext\src\FileBaseContext.Context\FileBaseContext.Context.csproj", "{0AE0364B-A4F0-4F11-8B54-8C62A6B2609B}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -71,10 +69,6 @@ Global
 		{B8966502-82F4-4880-8738-78350D454C1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B8966502-82F4-4880-8738-78350D454C1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B8966502-82F4-4880-8738-78350D454C1F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0AE0364B-A4F0-4F11-8B54-8C62A6B2609B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0AE0364B-A4F0-4F11-8B54-8C62A6B2609B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0AE0364B-A4F0-4F11-8B54-8C62A6B2609B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0AE0364B-A4F0-4F11-8B54-8C62A6B2609B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
