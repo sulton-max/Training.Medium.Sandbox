@@ -69,14 +69,14 @@ public static class SeedData
         var faker = EntityFakers.GetUserFaker(context);
         var uniqueUsers = new HashSet<User>(faker.Generate(100_000));
         var test = uniqueUsers.Take(count);
-        await context.Users.AddRangeAsync(uniqueUsers.Take(count));
+        await context.Users.AddRangeAsync(uniqueUsers.Take(count).ToArray());
     }
 
     private static async ValueTask AddUserCredentials(this IDataContext context, int count)
     {
         var faker = EntityFakers.GetUserCredentialsFaker(context);
         var userCredentials = faker.Generate(context.Users.Count());
-        await context.UserCredentials.AddRangeAsync(userCredentials.Take(count));
+        await context.UserCredentials.AddRangeAsync(userCredentials.Take(count).ToArray());
     }
 
     #endregion
@@ -88,7 +88,7 @@ public static class SeedData
         var faker = EntityFakers.GetBlogPostFaker(context);
         var uniquePosts = new HashSet<BlogPost>(faker.Generate(100_000));
 
-        await context.Posts.AddRangeAsync(uniquePosts.Take(count));
+        await context.Posts.AddRangeAsync(uniquePosts.Take(count).ToArray());
     }
 
     private static async ValueTask AddPostDetailsAsync(this IDataContext context, int count)
@@ -96,7 +96,7 @@ public static class SeedData
         var faker = EntityFakers.GetPostDetailsFaker(context);
         var postDetails = faker.Generate(context.Posts.Count());
 
-        await context.PostDetails.AddRangeAsync(postDetails.Take(count));
+        await context.PostDetails.AddRangeAsync(postDetails.Take(count).ToArray());
     }
 
     private static async ValueTask AddPostViewsAsync(this IDataContext context, int count)
@@ -104,7 +104,7 @@ public static class SeedData
         var faker = EntityFakers.GetPostViewFaker(context);
         var uniquePostViews = new HashSet<PostView>(faker.Generate(100_000));
 
-        await context.PostViews.AddRangeAsync(uniquePostViews.Take(count));
+        await context.PostViews.AddRangeAsync(uniquePostViews.Take(count).ToArray());
     }
 
     private static async ValueTask AddPostSharesAsync(this IDataContext context, int count)
@@ -112,7 +112,7 @@ public static class SeedData
         var faker = EntityFakers.GetPostShareFaker(context);
         var uniquePostViews = new HashSet<PostShare>(faker.Generate(100_000));
 
-        await context.PostShares.AddRangeAsync(uniquePostViews.Take(count));
+        await context.PostShares.AddRangeAsync(uniquePostViews.Take(count).ToArray());
     }
 
     private static async ValueTask AddPostCommentsAsync(this IDataContext context, int count)
@@ -120,7 +120,7 @@ public static class SeedData
         var faker = EntityFakers.GetPostCommentFaker(context);
         var uniquePostComments = new HashSet<PostComment>(faker.Generate(100_000));
 
-        await context.PostComments.AddRangeAsync(uniquePostComments.Take(count));
+        await context.PostComments.AddRangeAsync(uniquePostComments.Take(count).ToArray());
     }
 
     private static async ValueTask AddPostFeedback(this IDataContext context, int count)
@@ -128,7 +128,7 @@ public static class SeedData
         var faker = EntityFakers.GetPostFeedbackFaker(context);
         var uniquePostFeedbacks = new HashSet<PostFeedback>(faker.Generate(100_000));
 
-        await context.PostFeedbacks.AddRangeAsync(uniquePostFeedbacks.Take(count));
+        await context.PostFeedbacks.AddRangeAsync(uniquePostFeedbacks.Take(count).ToArray());
     }
 
     #endregion
@@ -148,7 +148,7 @@ public static class SeedData
 
         };
 
-        await context.EmailTemplates.AddRangeAsync(list.Take(count));
+        await context.EmailTemplates.AddRangeAsync(list.Take(count).ToArray());
     }
 
     #endregion

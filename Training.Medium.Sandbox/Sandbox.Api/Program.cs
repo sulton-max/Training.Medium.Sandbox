@@ -21,7 +21,11 @@ builder.Services.AddSingleton<IValidationService, ValidationService>();
 // data access
 builder.Services.AddScoped<IDataContext, AppFileContext>(_ =>
 {
-    var contextOptions = new FileContextOptions<AppFileContext>(Path.Combine(builder.Environment.ContentRootPath, "Data", "DataStorage"));
+    var contextOptions = new FileContextOptions<AppFileContext>
+    {
+        StorageRootPath = Path.Combine(builder.Environment.ContentRootPath, "Data", "DataStorage")
+    };
+
     var context = new AppFileContext(contextOptions);
     context.FetchAsync().AsTask().Wait();
 
@@ -46,13 +50,18 @@ builder.Services.AddScoped<IDiscoveryService, DiscoveryService>();
 // post analysis
 
 // notifications
+builder
+    .Services
+    .AddSingleton<IEmailSenderService, EmailSenderService>()
+    .AddScoped<IEmailManagementService, EmailManagementService>()
+    .AddScoped<IEmailTemplateService, EmailTemplateService>()
+    .AddScoped<IEmailPlaceholderService, EmailPlaceholderService>()
+    .AddScoped<IEmailMessageService, EmailMessageService>()
+    .AddScoped<IEmailService, EmailService>();
 
 // subscriptions
 builder.Services.AddScoped<ISubscriptionPromotionService, SubscriptionPromotionService>();
-
 builder.Services.Configure<EmailServerSettings>(builder.Configuration.GetSection(nameof(EmailServerSettings)));
-
-builder.Services.AddSingleton<IEmailSenderService, EmailSenderService>().AddScoped<IEmailManagementService, EmailManagementService>();
 
 // dev tools
 builder.Services.AddEndpointsApiExplorer();
@@ -64,11 +73,11 @@ builder.Services.AddRouting(options => options.LowercaseUrls = true);
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
-{
-    await using var dataContext = app.Services.CreateAsyncScope().ServiceProvider.GetRequiredService<IDataContext>();
-    await dataContext.InitializeSeedDataAsync();
-}
+// if (app.Environment.IsDevelopment())
+// {
+//     using var dataContext = app.Services.CreateAsyncScope().ServiceProvider.GetRequiredService<IDataContext>();
+//     await dataContext.InitializeSeedDataAsync();
+// }
 
 app.UseSwagger();
 app.UseSwaggerUI();

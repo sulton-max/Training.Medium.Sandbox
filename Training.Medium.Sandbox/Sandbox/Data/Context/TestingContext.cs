@@ -7,8 +7,10 @@ namespace Sandbox.Data.Context;
 
 public class TestingContext : AppFileContext
 {
-    public TestingContext() : base(
-        new FileContextOptions<AppFileContext>(Assembly.GetAssembly(typeof(TestingContext))?.Location!))
+    public TestingContext() : base(new FileContextOptions<AppFileContext>
+    {
+        StorageRootPath = Assembly.GetAssembly(typeof(TestingContext))?.Location!
+    })
     {
     }
 

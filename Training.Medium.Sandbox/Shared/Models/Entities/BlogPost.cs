@@ -6,12 +6,11 @@ namespace Shared.Models.Entities;
 public class BlogPost : SoftDeletedEntity
 {
     public BlogPost()
-    {
+    { }
 
-    }
-
-    public BlogPost(string title, Guid authorId, string content)
+    public BlogPost(Guid id, string title, Guid authorId, string content)
     {
+        Id = id;
         Title = title;
         AuthorId = authorId;
         Content = content;
@@ -22,19 +21,4 @@ public class BlogPost : SoftDeletedEntity
     public Guid AuthorId { get; set; }
 
     // TODO : Add is banned property
-
-    public override int GetHashCode()
-    {
-        return HashCode.Combine(Title, Content);
-    }
-
-    public override bool Equals(object? obj)
-    {
-        return obj is BlogPost blogPost && blogPost.GetHashCode().Equals(GetHashCode());
-    }
-
-    public override string ToString()
-    {
-        return $"Id: {Id}, Title: {Title}, AuthorId: {AuthorId}\n";
-    }
 }

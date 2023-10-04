@@ -10,7 +10,7 @@ namespace EntitiesSection.Services
         private readonly IDataContext _appDataContext;
         //private readonly IValidationService _validationService;
 
-        public PostService(IDataContext appDataContext)    //IValidationService validationService
+        public PostService(IDataContext appDataContext) //IValidationService validationService
         {
             _appDataContext = appDataContext;
             //_validationService = validationService;
@@ -20,9 +20,9 @@ namespace EntitiesSection.Services
         {
             await _appDataContext.Posts.AddAsync(blogPost);
 
-            if(saveChanges)
+            if (saveChanges)
                 await _appDataContext.SaveChangesAsync();
-                
+
             return blogPost;
         }
 
@@ -32,18 +32,25 @@ namespace EntitiesSection.Services
             if (foundPost is null)
                 throw new InvalidOperationException("You searched post not found");
 
-            foundPost.IsDeleted = true;
-            await _appDataContext.SaveChangesAsync();
+            await _appDataContext.Posts.RemoveAsync(foundPost);
+
+            if (saveChanges)
+                await _appDataContext.SaveChangesAsync();
             return foundPost;
         }
 
         public async ValueTask<BlogPost> DeleteAsync(BlogPost blogPost, bool saveChanges = true)
         {
             var foundPost = await GetByIdAsync(blogPost.Id);
+
             if (foundPost is null)
                 throw new InvalidOperationException("You searched post not found");
 
-            await _appDataContext.SaveChangesAsync();
+            await _appDataContext.Posts.RemoveAsync(foundPost);
+
+            if (saveChanges)
+                await _appDataContext.SaveChangesAsync();
+
             return foundPost;
         }
 
@@ -67,7 +74,7 @@ namespace EntitiesSection.Services
 
         public async ValueTask<BlogPost> UpdateAsync(BlogPost blogPost, bool saveChanges = true)
         {
-            var foundPost = _appDataContext.Posts.FirstOrDefault(searched =>  searched.Id == blogPost.Id);
+            var foundPost = _appDataContext.Posts.FirstOrDefault(searched => searched.Id == blogPost.Id);
             if (blogPost is null)
                 throw new InvalidOperationException("Post not found!");
 
@@ -75,13 +82,19 @@ namespace EntitiesSection.Services
             foundPost.AuthorId = blogPost.AuthorId;
             foundPost.Content = blogPost.Content;
 
-            await _appDataContext.SaveChangesAsync();
+            await _appDataContext.Posts.UpdateAsync(foundPost);
+
+            if (saveChanges)
+                await _appDataContext.SaveChangesAsync();
+
             return foundPost;
         }
 
         private bool ValidateOnCreate(BlogPost blogPost)
         {
-            var result = _appDataContext.Posts.FirstOrDefault(x => x.IsDeleted == false && x.Title == blogPost.Title && x.Content == blogPost.Content && x.AuthorId == blogPost.AuthorId && x.Id == blogPost.Id);
+            var result = _appDataContext.Posts.FirstOrDefault(x =>
+                x.IsDeleted == false && x.Title == blogPost.Title && x.Content == blogPost.Content && x.AuthorId == blogPost.AuthorId &&
+                x.Id == blogPost.Id);
             return result != null;
         }
 
@@ -92,15 +105,13 @@ namespace EntitiesSection.Services
             {
                 return false;
             }
-            bool isTitleUnique = !_appDataContext.Posts.Any(x => 
-                x.Id != blogPost.Id &&
-                x.IsDeleted == false &&
-                x.Title == blogPost.Title
-            );
+
+            bool isTitleUnique = !_appDataContext.Posts.Any(x => x.Id != blogPost.Id && x.IsDeleted == false && x.Title == blogPost.Title);
             if (!isTitleUnique)
             {
                 return false;
             }
+
             return true;
         }
 
@@ -110,10 +121,12 @@ namespace EntitiesSection.Services
             {
                 return false;
             }
+
             if (string.IsNullOrEmpty(blogPost.Content))
             {
                 return false;
             }
+
             return true;
         }
     }
